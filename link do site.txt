@@ -1,1 +1,7 @@
 https://www.go-astronomy.com/galaxies-all.php
+
+Como compilar arquivo cpp
+g++ main.cpp -o main
+
+Executar
+./main
