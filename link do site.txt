@@ -1,7 +1,7 @@
 https://www.go-astronomy.com/galaxies-all.php
 
 Como compilar arquivo cpp
-g++ main.cpp -o main
+g++ /home/maxnas7/Documentos/IALG/trabalho/Trabalho_IALG_Galaxias/main.cpp -o main
 
 Executar
 ./main
