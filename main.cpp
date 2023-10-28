@@ -65,9 +65,6 @@ vector<Galaxia> lerCSV(const string& nomeArquivo) {
 
             // Lê os campos da linha e atribui aos membros da struct
             if (getline(linhaStream, campo, ',')) {
-                galaxia.identificador = stoi(campo);
-            }
-            if (getline(linhaStream, campo, ',')) {
                 galaxia.nome_galaxia = campo;
             }
             if (getline(linhaStream, campo, ',')) {
@@ -78,6 +75,9 @@ vector<Galaxia> lerCSV(const string& nomeArquivo) {
             }
             if (getline(linhaStream, campo, ',')) {
                 galaxia.constelacao = campo;
+            }
+            if (getline(linhaStream, campo, ',')) {
+                galaxia.identificador = stoi(campo);
             }
 
             galaxias.push_back(galaxia);
@@ -91,18 +91,52 @@ vector<Galaxia> lerCSV(const string& nomeArquivo) {
     return galaxias;
 }
 
+void salvarCSV(vector<Galaxia> galaxias, string nomeArquivo) {
+    std::ofstream arquivo(nomeArquivo);
+
+    if (arquivo.is_open()) {
+        // Escreve o cabeçalho do arquivo CSV (opcional)
+        arquivo << "Identificador, Nome da Galáxia, Tipo da Galáxia, Magnitude, Constelação" << std::endl;
+
+        for (const Galaxia& galaxia : galaxias) {
+            arquivo << galaxia.identificador << ","
+                    << galaxia.nome_galaxia << ","
+                    << galaxia.tipo_galaxia << ","
+                    << galaxia.magnitude << ","
+                    << galaxia.constelacao << std::endl;
+        }
+
+        arquivo.close();
+        std::cout << "Dados salvos com sucesso em " << nomeArquivo << std::endl;
+    } else {
+        std::cerr << "Erro ao criar o arquivo." << std::endl;
+    }
+}
+
 int main () {
     string nomeArquivoCSV = "/home/maxnas7/Documentos/IALG/trabalho/Trabalho_IALG_Galaxias/galaxys.csv";
+    string nomeArquivoCSVteste = "/home/maxnas7/Documentos/IALG/trabalho/Trabalho_IALG_Galaxias/galaxys_teste.csv";
     int tamanhoCSV;
     // Ler o arquivo .csv
     tamanhoCSV = verificarTamanhoArquivoCSV(nomeArquivoCSV);
-    Galaxia galaxias[tamanhoCSV];
+    vector<Galaxia> galaxias;
 
-    galaxias = lerCSV;
+    galaxias = lerCSV(nomeArquivoCSV);
 
     cout << tamanhoCSV << endl;
     // ler_csv (); //Importar dados
     // escreve_csv (); //Exportar dados
+
+    for (const Galaxia& galaxia : galaxias) {
+        cout << "Identificador: " << galaxia.identificador << endl;
+        cout << "Nome da Galáxia: " << galaxia.nome_galaxia << endl;
+        cout << "Tipo da Galáxia: " << galaxia.tipo_galaxia << endl;
+        cout << "Magnitude: " << galaxia.magnitude << endl;
+        cout << "Constelação: " << galaxia.constelacao << endl;
+        cout << endl;
+    }
+
+    salvarCSV(galaxias, nomeArquivoCSVteste);
 
     return 0;
 }
