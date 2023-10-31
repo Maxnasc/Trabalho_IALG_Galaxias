@@ -332,6 +332,23 @@ void buscarGalaxia(const vector<Galaxia> &galaxias)
     }
 }
 
+void exibirListaCompleta(const vector<Galaxia> &galaxias) {
+    if (galaxias.empty()) {
+        cout << "Nenhuma galáxia cadastrada." << endl;
+        return;
+    }
+
+    cout << "Lista completa de registros:" << endl;
+    for (const Galaxia &galaxia : galaxias) {
+        cout << "Identificador: " << galaxia.identificador << endl;
+        cout << "Nome da Galáxia: " << galaxia.nome_galaxia << endl;
+        cout << "Tipo da Galáxia: " << galaxia.tipo_galaxia << endl;
+        cout << "Magnitude: " << galaxia.magnitude << endl;
+        cout << "Constelação: " << galaxia.constelacao << endl;
+        cout << endl;
+    }
+}
+
 
 void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArquivoCSVexport)
 {
@@ -380,7 +397,7 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
             buscarGalaxia(galaxias);
             break;
         case 7: // Exibir lista completa de registros
-            cout << "Não implementado" << endl;
+            exibirListaCompleta(galaxias);
             break;
         case 8: // Exibir lista parcial de registros
             cout << "Não implementado" << endl;
