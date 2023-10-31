@@ -133,6 +133,42 @@ void salvarCSV(vector<Galaxia> galaxias, string nomeArquivo)
     }
 }
 
+void inserirGalaxia(vector<Galaxia> &galaxias)
+{
+    Galaxia novaGalaxia;
+
+    // Solicita os detalhes da nova galáxia ao usuário
+    cout << "Inserir nova galáxia:" << endl;
+
+    // Pede o identificador
+    cout << "Identificador: ";
+    cin >> novaGalaxia.identificador;
+
+    // Pede o nome da galáxia (string com espaços)
+    cin.ignore();  // Limpa
+    cout << "Nome da Galáxia: ";
+    getline(cin, novaGalaxia.nome_galaxia);
+
+    // Pede o tipo da galáxia (string com espaços)
+    cout << "Tipo da Galáxia: ";
+    getline(cin, novaGalaxia.tipo_galaxia);
+
+    // Pede a magnitude
+    cout << "Magnitude: ";
+    cin >> novaGalaxia.magnitude;
+
+    // Pede a constelação (string com espaços)
+    cin.ignore();  // Limpa
+    cout << "Constelação: ";
+    getline(cin, novaGalaxia.constelacao);
+
+    // Adiciona a nova galáxia ao vetor
+    galaxias.push_back(novaGalaxia);
+
+    cout << "Nova galáxia adicionada com sucesso!" << endl;
+}
+
+
 void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArquivoCSVexport)
 {
 
@@ -171,7 +207,7 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
             cout << "Não implementado" << endl;
             break;
         case 4: // Inserir registro
-            cout << "Não implementado" << endl;
+            inserirGalaxia(galaxias);
             break;
         case 5: // Apagar registro
             cout << "Não implementado" << endl;
@@ -204,9 +240,9 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
 int main()
 {
     // Declaração de nomes de arquivos de import e export de .csv
-    string nomeArquivoCSVimport = "/home/maxnas7/Documentos/IALG/trabalho/Trabalho_IALG_Galaxias/galaxys_import.csv";
-    string nomeArquivoCSVexport = "/home/maxnas7/Documentos/IALG/trabalho/Trabalho_IALG_Galaxias/galaxys_export.csv";
-    int tamanhoCSV; // Verificador de galáxias cadastradas em arquivos .csv
+    string nomeArquivoCSVimport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_import.csv";
+    string nomeArquivoCSVexport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_export.csv";
+    //int tamanhoCSV; // Verificador de galáxias cadastradas em arquivos .csv
 
     // Verificar tamanho do arquivo .csv
     // tamanhoCSV = verificarTamanhoArquivoCSV(nomeArquivoCSVimport);
