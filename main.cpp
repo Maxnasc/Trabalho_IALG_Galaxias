@@ -377,7 +377,7 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
             removerGalaxia(galaxias);
             break;
         case 6: // Buscar registro
-            cout << "Não implementado" << endl;
+            buscarGalaxia(galaxias);
             break;
         case 7: // Exibir lista completa de registros
             cout << "Não implementado" << endl;
