@@ -3,7 +3,7 @@ Introdução a algoritmos
 2023-2
 
 Feito por:
-Cleber
+Cleber Henrique Silva Junior - 201910660
 Marcos Tadeu Xavier Ferreira - 201910448
 Max Deivid do Nascimento - 201910445
 */
