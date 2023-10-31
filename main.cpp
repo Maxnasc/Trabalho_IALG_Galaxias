@@ -425,13 +425,13 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
         case 8: // Exibir lista parcial de registros
             imprimirIntervalo(galaxias);
             break;
-        case 9: // Exibir lista parcial de registros
+        case 9: // Exibir modificação atual
             cout << "Não implementado" << endl;
             break;
         case 10: // Salvar alterações
             cout << "Não implementado" << endl;
             break;
-        case 0: // Exibir lista parcial de registros
+        case 0: // Sair do programa
             cout << endl << "Obrigado! :)" << endl;
             break;
         default:
