@@ -168,6 +168,30 @@ void inserirGalaxia(vector<Galaxia> &galaxias)
     cout << "Nova galáxia adicionada com sucesso!" << endl;
 }
 
+void removerGalaxia(vector<Galaxia> &galaxias)
+{
+    int identificadorParaRemover;
+    
+    // Solicita o identificador da galáxia a ser removida
+    cout << "Digite o identificador da galáxia que deseja remover: ";
+    cin >> identificadorParaRemover;
+    
+    // Procura a galáxia no vetor pelo identificador
+    for (auto it = galaxias.begin(); it != galaxias.end(); ++it)
+    {
+        if (it->identificador == identificadorParaRemover)
+        {
+            // Remove efetivamente a galáxia do vetor
+            galaxias.erase(it);
+            cout << "Galáxia removida com sucesso!" << endl;
+            return;  // Sai da função após a remoção
+        }
+    }
+    
+    // Se o identificador não for encontrado
+    cout << "Galáxia com identificador " << identificadorParaRemover << " não encontrada." << endl;
+}
+
 
 void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArquivoCSVexport)
 {
@@ -210,7 +234,7 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
             inserirGalaxia(galaxias);
             break;
         case 5: // Apagar registro
-            cout << "Não implementado" << endl;
+            removerGalaxia(galaxias);
             break;
         case 6: // Buscar registro
             cout << "Não implementado" << endl;
@@ -236,6 +260,7 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
         }
     }
 }
+
 
 int main()
 {
