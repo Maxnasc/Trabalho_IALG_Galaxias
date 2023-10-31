@@ -206,8 +206,9 @@ void buscarGalaxia(const vector<Galaxia> &galaxias)
     cout << "Opção: ";
     cin >> opcaoBusca;
 
-    string termoBusca;
     bool encontrou = false;
+
+    string termoBusca;
 
     // Limpa o buffer do teclado
     cin.ignore();
@@ -216,7 +217,6 @@ void buscarGalaxia(const vector<Galaxia> &galaxias)
     {
         case 1:
             int identBuscado;
-            bool encontrou = false;
 
             cout << "Digite o identificador que deseja buscar: ";
             cin >> identBuscado;
@@ -279,7 +279,6 @@ void buscarGalaxia(const vector<Galaxia> &galaxias)
 
         case 4:
             float magnitudeBuscada;
-            bool encontrou = false;
 
             cout << "Digite a magnitude que deseja buscar: ";
             cin >> magnitudeBuscada;
@@ -302,6 +301,7 @@ void buscarGalaxia(const vector<Galaxia> &galaxias)
             {
                 cout << "Nenhum registro encontrado com a magnitude especificada." << endl;
             }
+            break;
 
         case 5:
             cout << "Digite a constelação da galáxia que deseja buscar: ";
