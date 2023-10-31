@@ -133,6 +133,57 @@ void salvarCSV(vector<Galaxia> galaxias, string nomeArquivo)
     }
 }
 
+void ordenarDados(vector<Galaxia>& galaxias) {
+
+    cout << "Ordenador de dados" << endl;
+    cout << "É possível ordenar os dados do catálogo com base no valor de todas as colunas, para selecionar\n a coluna referência para ordenação selecione a opção de acordo com o menu abaixo:" << endl;
+    cout << "1 -> Por identificador" << endl;
+    cout << "2 -> nome_galaxia" << endl;
+    cout << "3 -> tipo_galaxia" << endl;
+    cout << "4 -> magnitude" << endl;
+    cout << "5 -> constelacao" << endl;
+    cout << endl << "Critério de seleção: ";
+    int criterio = 0;
+    cin >> criterio;
+    
+    int n = galaxias.size();
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            bool trocar = false;
+
+            switch (criterio) {
+                case 1:
+                    trocar = galaxias[j].identificador > galaxias[j + 1].identificador;
+                    break;
+                case 2:
+                    trocar = galaxias[j].nome_galaxia > galaxias[j + 1].nome_galaxia;
+                    break;
+                case 3:
+                    trocar = galaxias[j].tipo_galaxia > galaxias[j + 1].tipo_galaxia;
+                    break;
+                case 4:
+                    trocar = galaxias[j].magnitude > galaxias[j + 1].magnitude;
+                    break;
+                case 5:
+                    trocar = galaxias[j].constelacao > galaxias[j + 1].constelacao;
+                    break;
+                default:
+                    cerr << "Critério de seleção inválido." << std::endl;
+                    return;
+            }
+
+            if (trocar) {
+                swap(galaxias[j], galaxias[j + 1]);
+            }
+        }
+    }
+}
+
+vector<Galaxia> galaxias carregar_dados() {
+    vector<Galaxia> galaxias;
+    return galaxias
+}
+
 void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArquivoCSVexport)
 {
 
@@ -159,6 +210,7 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
         cout << endl << "Opção: ";
         cin >> escolha;
         cout << endl;
+        
         switch (escolha)
         {
         case 1: // Importar dados de arquivo .csv
@@ -168,7 +220,9 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
             salvarCSV(galaxias, nomeArquivoCSVexport);
             break;
         case 3: // Ordenar dados de acordo com característica especificada
-            cout << "Não implementado" << endl;
+            cout << "em desenvolvimento" << endl;
+            galaxias = carregar_dados(); //Carregar dados do arquivo binário 
+            ordenarDados(galaxias);
             break;
         case 4: // Inserir registro
             cout << "Não implementado" << endl;
