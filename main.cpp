@@ -349,6 +349,29 @@ void exibirListaCompleta(const vector<Galaxia> &galaxias) {
     }
 }
 
+void imprimirIntervalo(const vector<Galaxia> &galaxias) {
+    
+    int inicio, fim;
+    cout << "Digite o número do primeiro registro do intervalo: ";
+    cin >> inicio;
+    cout << "Digite o número do último registro do intervalo: ";
+    cin >> fim;
+    
+    if (inicio < 1 || fim > galaxias.size() || inicio > fim) {
+        cout << "Intervalo inválido." << endl;
+        return;
+    }
+
+    cout << "Registros no intervalo [" << inicio << " - " << fim << "]:" << endl;
+    for (int i = inicio - 1; i < fim; i++) {  // Subtrai 1 de 'inicio' para ajustar ao índice base 0
+        cout << "Identificador: " << galaxias[i].identificador << endl;
+        cout << "Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
+        cout << "Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
+        cout << "Magnitude: " << galaxias[i].magnitude << endl;
+        cout << "Constelação: " << galaxias[i].constelacao << endl;
+        cout << endl;
+    }
+}
 
 void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArquivoCSVexport)
 {
@@ -400,7 +423,7 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
             exibirListaCompleta(galaxias);
             break;
         case 8: // Exibir lista parcial de registros
-            cout << "Não implementado" << endl;
+            imprimirIntervalo(galaxias);
             break;
         case 9: // Exibir lista parcial de registros
             cout << "Não implementado" << endl;
