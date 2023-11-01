@@ -177,12 +177,20 @@ void ordenarDados(vector<Galaxia>& galaxias) {
             }
         }
     }
+
+    salvar_dados_bin(galaxias);
+
 }
 
-vector<Galaxia> galaxias carregar_dados() {
-    vector<Galaxia> galaxias;
-    return galaxias
+void salvar_dados_bin(vector<Galaxia>& galaxias) {
+    // Implementar
 }
+
+void carregar_dados_bin(vector<Galaxia>& galaxias) {
+    // Implementar
+}
+
+void exibe_dados_struct_galaxias () {}
 
 void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArquivoCSVexport)
 {
@@ -220,8 +228,7 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
             salvarCSV(galaxias, nomeArquivoCSVexport);
             break;
         case 3: // Ordenar dados de acordo com característica especificada
-            cout << "em desenvolvimento" << endl;
-            galaxias = carregar_dados(); //Carregar dados do arquivo binário 
+            cout << "em desenvolvimento" << endl;   
             ordenarDados(galaxias);
             break;
         case 4: // Inserir registro
