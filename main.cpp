@@ -392,8 +392,7 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
         cout << "6  -> Buscar registro" << endl;
         cout << "7  -> Exibir lista completa de registros" << endl;
         cout << "8  -> Exibir lista parcial de registros" << endl;
-        cout << "9  -> Exibir modificação atual" << endl;
-        cout << "10 -> Salvar alterações" << endl;
+        cout << "9 -> Salvar alterações" << endl;
         cout << "0  -> Sair do programa" << endl;
         cout << endl << "====================================================================" << endl;
         cout << endl << "Opção: ";
@@ -425,10 +424,7 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
         case 8: // Exibir lista parcial de registros
             imprimirIntervalo(galaxias);
             break;
-        case 9: // Exibir modificação atual
-            cout << "Não implementado" << endl;
-            break;
-        case 10: // Salvar alterações
+        case 9: // Salvar alterações
             cout << "Não implementado" << endl;
             break;
         case 0: // Sair do programa
