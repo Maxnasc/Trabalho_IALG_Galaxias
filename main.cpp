@@ -438,6 +438,7 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
     // Bloco de indicação de quais as funções disponíveis para o usuário
     cout << "Bem vindo ao sistema de gerenciamento de informações galácticas!" << endl;
     int escolha = 100;
+    bool saved = false;
 
     while (escolha != 0)
     {
@@ -487,8 +488,12 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
             break;
         case 9: // Salvar alterações
             cout << "Não implementado" << endl;
+            saved = true; // Melhor ser o retorno da função
             break;
         case 0: // Sair do programa
+            if (saved != true) {
+                // chama função de salvar em arquivo binário
+            }
             cout << endl << "Obrigado! :)" << endl;
             break;
         default:
