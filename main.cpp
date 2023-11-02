@@ -3,7 +3,7 @@ Introdução a algoritmos
 2023-2
 
 Feito por:
-Cleber
+Cleber Henrique Silva Junior - 201910660
 Marcos Tadeu Xavier Ferreira - 201910448
 Max Deivid do Nascimento - 201910445
 */
@@ -133,6 +133,246 @@ void salvarCSV(vector<Galaxia> galaxias, string nomeArquivo)
     }
 }
 
+void inserirGalaxia(vector<Galaxia> &galaxias)
+{
+    Galaxia novaGalaxia;
+
+    // Solicita os detalhes da nova galáxia ao usuário
+    cout << "Inserir nova galáxia:" << endl;
+
+    // Pede o identificador
+    cout << "Identificador: ";
+    cin >> novaGalaxia.identificador;
+
+    // Pede o nome da galáxia (string com espaços)
+    cin.ignore();  // Limpa
+    cout << "Nome da Galáxia: ";
+    getline(cin, novaGalaxia.nome_galaxia);
+
+    // Pede o tipo da galáxia (string com espaços)
+    cout << "Tipo da Galáxia: ";
+    getline(cin, novaGalaxia.tipo_galaxia);
+
+    // Pede a magnitude
+    cout << "Magnitude: ";
+    cin >> novaGalaxia.magnitude;
+
+    // Pede a constelação (string com espaços)
+    cin.ignore();  // Limpa
+    cout << "Constelação: ";
+    getline(cin, novaGalaxia.constelacao);
+
+    // Adiciona a nova galáxia ao vetor
+    galaxias.push_back(novaGalaxia);
+
+    cout << "Nova galáxia adicionada com sucesso!" << endl;
+}
+
+void removerGalaxia(vector<Galaxia> &galaxias)
+{
+    int identificadorParaRemover;
+    
+    // Solicita o identificador da galáxia a ser removida
+    cout << "Digite o identificador da galáxia que deseja remover: ";
+    cin >> identificadorParaRemover;
+    
+    // Procura a galáxia no vetor pelo identificador
+    for (auto it = galaxias.begin(); it != galaxias.end(); ++it)
+    {
+        if (it->identificador == identificadorParaRemover)
+        {
+            // Remove efetivamente a galáxia do vetor
+            galaxias.erase(it);
+            cout << "Galáxia removida com sucesso!" << endl;
+            return;  // Sai da função após a remoção
+        }
+    }
+    
+    // Se o identificador não for encontrado
+    cout << "Galáxia com identificador " << identificadorParaRemover << " não encontrada." << endl;
+}
+
+void buscarGalaxia(const vector<Galaxia> &galaxias)
+{
+    int opcaoBusca;
+
+    // Menu para escolher o critério de busca
+    cout << "Escolha o critério de busca:" << endl;
+    cout << "1 -> Identificador" << endl;
+    cout << "2 -> Nome da Galáxia" << endl;
+    cout << "3 -> Tipo da Galáxia" << endl;
+    cout << "4 -> Magnitude" << endl;
+    cout << "5 -> Constelação" << endl;
+    cout << "Opção: ";
+    cin >> opcaoBusca;
+
+    bool encontrou = false;
+
+    string termoBusca;
+
+    // Limpa o buffer do teclado
+    cin.ignore();
+
+    switch (opcaoBusca)
+    {
+        case 1:
+            int identBuscado;
+
+            cout << "Digite o identificador que deseja buscar: ";
+            cin >> identBuscado;
+
+            for (const Galaxia &galaxia : galaxias)
+            {
+                if (galaxia.identificador == identBuscado)
+                {
+                    // Encontrou uma galáxia com a magnitude especificada
+                    cout << "Identificador: " << galaxia.identificador << endl;
+                    cout << "Nome da Galáxia: " << galaxia.nome_galaxia << endl;
+                    cout << "Tipo da Galáxia: " << galaxia.tipo_galaxia << endl;
+                    cout << "Magnitude: " << galaxia.magnitude << endl;
+                    cout << "Constelação: " << galaxia.constelacao << endl;
+                    encontrou = true;
+                }
+            }
+
+            if (!encontrou)
+            {
+                cout << "Nenhum registro encontrado com a magnitude especificada." << endl;
+            }
+            break;
+        
+        case 2:
+            cout << "Digite o nome da galáxia que deseja buscar: ";
+            getline(cin, termoBusca);
+            for (const Galaxia &galaxia : galaxias)
+            {
+                if (galaxia.nome_galaxia.find(termoBusca) != string::npos)
+                {
+                    // Encontrou uma galáxia com o nome especificado
+                    cout << "Identificador: " << galaxia.identificador << endl;
+                    cout << "Nome da Galáxia: " << galaxia.nome_galaxia << endl;
+                    cout << "Tipo da Galáxia: " << galaxia.tipo_galaxia << endl;
+                    cout << "Magnitude: " << galaxia.magnitude << endl;
+                    cout << "Constelação: " << galaxia.constelacao << endl;
+                    encontrou = true;
+                }
+            }
+            break;
+
+        case 3:
+            cout << "Digite o tipo da galáxia que deseja buscar: ";
+            getline(cin, termoBusca);
+            for (const Galaxia &galaxia : galaxias)
+            {
+                if (galaxia.tipo_galaxia.find(termoBusca) != string::npos)
+                {
+                    // Encontrou uma galáxia com o nome especificado
+                    cout << "Identificador: " << galaxia.identificador << endl;
+                    cout << "Nome da Galáxia: " << galaxia.nome_galaxia << endl;
+                    cout << "Tipo da Galáxia: " << galaxia.tipo_galaxia << endl;
+                    cout << "Magnitude: " << galaxia.magnitude << endl;
+                    cout << "Constelação: " << galaxia.constelacao << endl;
+                    encontrou = true;
+                }
+            }
+            break;
+
+        case 4:
+            float magnitudeBuscada;
+
+            cout << "Digite a magnitude que deseja buscar: ";
+            cin >> magnitudeBuscada;
+
+            for (const Galaxia &galaxia : galaxias)
+            {
+                if (galaxia.magnitude == magnitudeBuscada)
+                {
+                    // Encontrou uma galáxia com a magnitude especificada
+                    cout << "Identificador: " << galaxia.identificador << endl;
+                    cout << "Nome da Galáxia: " << galaxia.nome_galaxia << endl;
+                    cout << "Tipo da Galáxia: " << galaxia.tipo_galaxia << endl;
+                    cout << "Magnitude: " << galaxia.magnitude << endl;
+                    cout << "Constelação: " << galaxia.constelacao << endl;
+                    encontrou = true;
+                }
+            }
+
+            if (!encontrou)
+            {
+                cout << "Nenhum registro encontrado com a magnitude especificada." << endl;
+            }
+            break;
+
+        case 5:
+            cout << "Digite a constelação da galáxia que deseja buscar: ";
+            getline(cin, termoBusca);
+            for (const Galaxia &galaxia : galaxias)
+            {
+                if (galaxia.constelacao.find(termoBusca) != string::npos)
+                {
+                    // Encontrou uma galáxia com o nome especificado
+                    cout << "Identificador: " << galaxia.identificador << endl;
+                    cout << "Nome da Galáxia: " << galaxia.nome_galaxia << endl;
+                    cout << "Tipo da Galáxia: " << galaxia.tipo_galaxia << endl;
+                    cout << "Magnitude: " << galaxia.magnitude << endl;
+                    cout << "Constelação: " << galaxia.constelacao << endl;
+                    encontrou = true;
+                }
+            }
+            break;
+
+        default:
+            cout << "Opção de busca inválida." << endl;
+            break;
+    }
+
+    if (!encontrou)
+    {
+        cout << "Nenhum registro encontrado para o critério de busca especificado." << endl;
+    }
+}
+
+void exibirListaCompleta(const vector<Galaxia> &galaxias) {
+    if (galaxias.empty()) {
+        cout << "Nenhuma galáxia cadastrada." << endl;
+        return;
+    }
+
+    cout << "Lista completa de registros:" << endl;
+    for (const Galaxia &galaxia : galaxias) {
+        cout << "Identificador: " << galaxia.identificador << endl;
+        cout << "Nome da Galáxia: " << galaxia.nome_galaxia << endl;
+        cout << "Tipo da Galáxia: " << galaxia.tipo_galaxia << endl;
+        cout << "Magnitude: " << galaxia.magnitude << endl;
+        cout << "Constelação: " << galaxia.constelacao << endl;
+        cout << endl;
+    }
+}
+
+void imprimirIntervalo(const vector<Galaxia> &galaxias) {
+    
+    int inicio, fim;
+    cout << "Digite o número do primeiro registro do intervalo: ";
+    cin >> inicio;
+    cout << "Digite o número do último registro do intervalo: ";
+    cin >> fim;
+    
+    if (inicio < 1 || fim > galaxias.size() || inicio > fim) {
+        cout << "Intervalo inválido." << endl;
+        return;
+    }
+
+    cout << "Registros no intervalo [" << inicio << " - " << fim << "]:" << endl;
+    for (int i = inicio - 1; i < fim; i++) {  // Subtrai 1 de 'inicio' para ajustar ao índice base 0
+        cout << "Identificador: " << galaxias[i].identificador << endl;
+        cout << "Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
+        cout << "Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
+        cout << "Magnitude: " << galaxias[i].magnitude << endl;
+        cout << "Constelação: " << galaxias[i].constelacao << endl;
+        cout << endl;
+    }
+}
+
 void ordenarDados(vector<Galaxia>& galaxias) {
 
     cout << "Ordenador de dados" << endl;
@@ -232,27 +472,27 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
             ordenarDados(galaxias);
             break;
         case 4: // Inserir registro
-            cout << "Não implementado" << endl;
+            inserirGalaxia(galaxias);
             break;
         case 5: // Apagar registro
-            cout << "Não implementado" << endl;
+            removerGalaxia(galaxias);
             break;
         case 6: // Buscar registro
-            cout << "Não implementado" << endl;
+            buscarGalaxia(galaxias);
             break;
         case 7: // Exibir lista completa de registros
-            cout << "Não implementado" << endl;
+            exibirListaCompleta(galaxias);
             break;
         case 8: // Exibir lista parcial de registros
-            cout << "Não implementado" << endl;
+            imprimirIntervalo(galaxias);
             break;
-        case 9: // Exibir lista parcial de registros
+        case 9: // Exibir modificação atual
             cout << "Não implementado" << endl;
             break;
         case 10: // Salvar alterações
             cout << "Não implementado" << endl;
             break;
-        case 0: // Exibir lista parcial de registros
+        case 0: // Sair do programa
             cout << endl << "Obrigado! :)" << endl;
             break;
         default:
@@ -262,12 +502,13 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
     }
 }
 
+
 int main()
 {
     // Declaração de nomes de arquivos de import e export de .csv
-    string nomeArquivoCSVimport = "/home/maxnas7/Documentos/IALG/trabalho/Trabalho_IALG_Galaxias/galaxys_import.csv";
-    string nomeArquivoCSVexport = "/home/maxnas7/Documentos/IALG/trabalho/Trabalho_IALG_Galaxias/galaxys_export.csv";
-    int tamanhoCSV; // Verificador de galáxias cadastradas em arquivos .csv
+    string nomeArquivoCSVimport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_import.csv";
+    string nomeArquivoCSVexport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_export.csv";
+    //int tamanhoCSV; // Verificador de galáxias cadastradas em arquivos .csv
 
     // Verificar tamanho do arquivo .csv
     // tamanhoCSV = verificarTamanhoArquivoCSV(nomeArquivoCSVimport);
