@@ -133,6 +133,24 @@ void salvarCSV(vector<Galaxia> galaxias, string nomeArquivo)
     }
 }
 
+bool salvar_dados_bin(const vector<Galaxia> &galaxias, const string &nomeArquivoBinario) {
+    ofstream arquivo(nomeArquivoBinario, ios::out | ios::binary);
+
+    if (arquivo.is_open()) {
+        for (const Galaxia &galaxia : galaxias) {
+            // Escreve os dados da galáxia no arquivo binário
+            arquivo.write(reinterpret_cast<const char*>(&galaxia), sizeof(Galaxia));
+        }
+
+        arquivo.close();
+        cout << "Dados salvos com sucesso em " << nomeArquivoBinario << endl;
+        return true; // Indica que os dados foram salvos com sucesso
+    } else {
+        cerr << "Erro ao criar o arquivo binário." << endl;
+        return false; // Indica que houve um erro ao salvar os dados
+    }
+}
+
 void inserirGalaxia(vector<Galaxia> &galaxias)
 {
     Galaxia novaGalaxia;
@@ -351,7 +369,7 @@ void exibirListaCompleta(const vector<Galaxia> &galaxias) {
 
 void imprimirIntervalo(const vector<Galaxia> &galaxias) {
     
-    int inicio, fim;
+    unsigned inicio, fim;
     cout << "Digite o número do primeiro registro do intervalo: ";
     cin >> inicio;
     cout << "Digite o número do último registro do intervalo: ";
@@ -363,7 +381,7 @@ void imprimirIntervalo(const vector<Galaxia> &galaxias) {
     }
 
     cout << "Registros no intervalo [" << inicio << " - " << fim << "]:" << endl;
-    for (int i = inicio - 1; i < fim; i++) {  // Subtrai 1 de 'inicio' para ajustar ao índice base 0
+    for (unsigned i = inicio - 1; i < fim; i++) {  // Subtrai 1 de 'inicio' para ajustar ao índice base 0
         cout << "Identificador: " << galaxias[i].identificador << endl;
         cout << "Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
         cout << "Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
@@ -420,24 +438,6 @@ void ordenarDados(vector<Galaxia>& galaxias, string nome_arquivo_binario) {
 
     salvar_dados_bin(galaxias, nome_arquivo_binario);
 
-}
-
-bool salvar_dados_bin(const vector<Galaxia> &galaxias, const string &nomeArquivoBinario) {
-    ofstream arquivo(nomeArquivoBinario, ios::out | ios::binary);
-
-    if (arquivo.is_open()) {
-        for (const Galaxia &galaxia : galaxias) {
-            // Escreve os dados da galáxia no arquivo binário
-            arquivo.write(reinterpret_cast<const char*>(&galaxia), sizeof(Galaxia));
-        }
-
-        arquivo.close();
-        cout << "Dados salvos com sucesso em " << nomeArquivoBinario << endl;
-        return true; // Indica que os dados foram salvos com sucesso
-    } else {
-        cerr << "Erro ao criar o arquivo binário." << endl;
-        return false; // Indica que houve um erro ao salvar os dados
-    }
 }
 
 void carregar_dados_bin(vector<Galaxia>& galaxias) {
