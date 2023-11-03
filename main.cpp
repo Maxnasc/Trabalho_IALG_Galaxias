@@ -441,7 +441,19 @@ void ordenarDados(vector<Galaxia>& galaxias, string nome_arquivo_binario) {
 }
 
 void carregar_dados_bin(vector<Galaxia>& galaxias) {
-    // Implementar
+    std::ofstream arquivo(nomeArquivo, std::ios::binary);
+
+    if (arquivo.is_open()) {
+        for (const Galaxia &galaxia : galaxias) {
+            // Escreve cada objeto Galaxia no arquivo binário
+            arquivo.write(reinterpret_cast<const char*>(&galaxia), sizeof(Galaxia));
+        }
+
+        arquivo.close();
+        std::cout << "Dados salvos com sucesso em " << nomeArquivo << " (formato binário)." << std::endl;
+    } else {
+        std::cerr << "Erro ao criar o arquivo binário." << std::endl;
+    }
 }
 
 void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArquivoCSVexport, string nome_arquivo_binario)
