@@ -56,8 +56,9 @@ int verificarTamanhoArquivoCSV(const string &nomeArquivo)
     }
 }
 
-void lerCSV(Galaxia& galaxias[], const string &nomeArquivo)
+vector<Galaxia> lerCSV(const string &nomeArquivo)
 {
+    vector<Galaxia> galaxias;
     ifstream arquivo(nomeArquivo);
 
     if (arquivo.is_open())
@@ -102,9 +103,10 @@ void lerCSV(Galaxia& galaxias[], const string &nomeArquivo)
         cerr << "Erro ao abrir o arquivo." << endl;
     }
 
+    return galaxias;
 }
 
-void salvarCSV(Galaxia galaxias[], string nomeArquivo)
+void salvarCSV(vector<Galaxia> galaxias, string nomeArquivo)
 {
     std::ofstream arquivo(nomeArquivo);
 
@@ -113,13 +115,13 @@ void salvarCSV(Galaxia galaxias[], string nomeArquivo)
         // Escreve o cabeçalho do arquivo CSV (opcional)
         arquivo << "Identificador, Nome da Galáxia, Tipo da Galáxia, Magnitude, Constelação" << std::endl;
 
-        for (int i=0; i<sizeof(galaxias); i++)
+        for (const Galaxia &galaxia : galaxias)
         {
-            arquivo << galaxias[i].identificador << ","
-                    << galaxias[i].nome_galaxia << ","
-                    << galaxias[i].tipo_galaxia << ","
-                    << galaxias[i].magnitude << ","
-                    << galaxias[i].constelacao << std::endl;
+            arquivo << galaxia.identificador << ","
+                    << galaxia.nome_galaxia << ","
+                    << galaxia.tipo_galaxia << ","
+                    << galaxia.magnitude << ","
+                    << galaxia.constelacao << std::endl;
         }
 
         arquivo.close();
@@ -389,7 +391,7 @@ void imprimirIntervalo(const vector<Galaxia> &galaxias) {
     }
 }
 
-void ordenarDados(Galaxia& galaxias) {
+void ordenarDados(vector<Galaxia>& galaxias, string nome_arquivo_binario) {
 
     cout << "Ordenador de dados" << endl;
     cout << "É possível ordenar os dados do catálogo com base no valor de todas as colunas, para selecionar\n a coluna referência para ordenação selecione a opção de acordo com o menu abaixo:" << endl;
@@ -402,7 +404,7 @@ void ordenarDados(Galaxia& galaxias) {
     int criterio = 0;
     cin >> criterio;
     
-    int n = sizeof(galaxias);
+    int n = galaxias.size();
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
             bool trocar = false;
@@ -438,10 +440,6 @@ void ordenarDados(Galaxia& galaxias) {
 
 }
 
-void salvar_dados_bin(vector<Galaxia>& galaxias) {
-    // Implementarlear
-}
-
 void carregar_dados_bin(vector<Galaxia>& galaxias) {
     std::ofstream arquivo(nomeArquivo, std::ios::binary);
 
@@ -452,20 +450,19 @@ void carregar_dados_bin(vector<Galaxia>& galaxias) {
         }
 
         arquivo.close();
-        std::cout << "Dados salvos com sucesso em " << nomeArquivo << " (formato binário)." << std::endl;
+        cout << "Dados salvos com sucesso em " << nomeArquivo << " (formato binário)." << endl;
     } else {
-        std::cerr << "Erro ao criar o arquivo binário." << std::endl;
+        cout << "Erro ao criar o arquivo binário." << endl;
     }
 }
 
-void menu(string nomeArquivoCSVimport, string nomeArquivoCSVexport)
+void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArquivoCSVexport, string nome_arquivo_binario)
 {
 
     // Bloco de indicação de quais as funções disponíveis para o usuário
     cout << "Bem vindo ao sistema de gerenciamento de informações galácticas!" << endl;
     int escolha = 100;
     bool saved = false;
-    Galaxia galaxias[100];
 
     while (escolha != 0)
     {
@@ -489,7 +486,7 @@ void menu(string nomeArquivoCSVimport, string nomeArquivoCSVexport)
         switch (escolha)
         {
         case 1: // Importar dados de arquivo .csv
-            lerCSV(galaxias, nomeArquivoCSVimport); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
+            galaxias = lerCSV(nomeArquivoCSVimport);
             break;
         case 2: // Exportar dados para arquivo .csv
             salvarCSV(galaxias, nomeArquivoCSVexport);
@@ -518,7 +515,7 @@ void menu(string nomeArquivoCSVimport, string nomeArquivoCSVexport)
             break;
         case 0: // Sair do programa
             if (saved != true) {
-                // chama função de salvar em arquivo binário
+                salvar_dados_bin(galaxias, nome_arquivo_binario);
             }
             cout << endl << "Obrigado! :)" << endl;
             break;
@@ -528,7 +525,6 @@ void menu(string nomeArquivoCSVimport, string nomeArquivoCSVexport)
         }
     }
 }
-
 
 int main()
 {
@@ -543,7 +539,8 @@ int main()
     // cout << tamanhoCSV << endl;
 
     // Struct de dados
-    menu(nomeArquivoCSVimport, nomeArquivoCSVexport);
+    vector<Galaxia> galaxias;
+    menu(galaxias, nomeArquivoCSVimport, nomeArquivoCSVexport, nome_arquivo_binario);
     // for (const Galaxia& galaxia : galaxias) {
     //     cout << "Identificador: " << galaxia.identificador << endl;
     //     cout << "Nome da Galáxia: " << galaxia.nome_galaxia << endl;
