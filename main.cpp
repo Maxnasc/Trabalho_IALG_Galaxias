@@ -56,55 +56,53 @@ int verificarTamanhoArquivoCSV(const string &nomeArquivo)
     }
 }
 
-vector<Galaxia> lerCSV(const string &nomeArquivo)
-{
-    vector<Galaxia> galaxias;
-    ifstream arquivo(nomeArquivo);
+// void lerCSV(Galaxia& galaxias[], const string &nomeArquivo)
+// {
+//     ifstream arquivo(nomeArquivo);
 
-    if (arquivo.is_open())
-    {
-        string linha;
+//     if (arquivo.is_open())
+//     {
+//         string linha;
 
-        while (getline(arquivo, linha))
-        {
-            Galaxia galaxia;
-            istringstream linhaStream(linha);
-            string campo;
+//         while (getline(arquivo, linha))
+//         {
+//             Galaxia galaxia;
+//             istringstream linhaStream(linha);
+//             string campo;
 
-            // Lê os campos da linha e atribui aos membros da struct
-            if (getline(linhaStream, campo, ','))
-            {
-                galaxia.nome_galaxia = campo;
-            }
-            if (getline(linhaStream, campo, ','))
-            {
-                galaxia.tipo_galaxia = campo;
-            }
-            if (getline(linhaStream, campo, ','))
-            {
-                galaxia.magnitude = stof(campo);
-            }
-            if (getline(linhaStream, campo, ','))
-            {
-                galaxia.constelacao = campo;
-            }
-            if (getline(linhaStream, campo, ','))
-            {
-                galaxia.identificador = stoi(campo);
-            }
+//             // Lê os campos da linha e atribui aos membros da struct
+//             if (getline(linhaStream, campo, ','))
+//             {
+//                 galaxia.nome_galaxia = campo;
+//             }
+//             if (getline(linhaStream, campo, ','))
+//             {
+//                 galaxia.tipo_galaxia = campo;
+//             }
+//             if (getline(linhaStream, campo, ','))
+//             {
+//                 galaxia.magnitude = stof(campo);
+//             }
+//             if (getline(linhaStream, campo, ','))
+//             {
+//                 galaxia.constelacao = campo;
+//             }
+//             if (getline(linhaStream, campo, ','))
+//             {
+//                 galaxia.identificador = stoi(campo);
+//             }
 
-            galaxias.push_back(galaxia);
-        }
-        cout << "Arquivo lido com sucesso!" << endl;
-        arquivo.close();
-    }
-    else
-    {
-        cerr << "Erro ao abrir o arquivo." << endl;
-    }
+//             galaxias.push_back(galaxia);
+//         }
+//         cout << "Arquivo lido com sucesso!" << endl;
+//         arquivo.close();
+//     }
+//     else
+//     {
+//         cerr << "Erro ao abrir o arquivo." << endl;
+//     }
 
-    return galaxias;
-}
+// }
 
 void salvarCSV(vector<Galaxia> galaxias, string nomeArquivo)
 {
@@ -151,40 +149,40 @@ bool salvar_dados_bin(const vector<Galaxia> &galaxias, const string &nomeArquivo
     }
 }
 
-void inserirGalaxia(vector<Galaxia> &galaxias)
-{
-    Galaxia novaGalaxia;
+// void inserirGalaxia(Galaxia galaxias[])
+// {
+//     Galaxia novaGalaxia;
 
-    // Solicita os detalhes da nova galáxia ao usuário
-    cout << "Inserir nova galáxia:" << endl;
+//     // Solicita os detalhes da nova galáxia ao usuário
+//     cout << "Inserir nova galáxia:" << endl;
 
-    // Pede o identificador
-    cout << "Identificador: ";
-    cin >> novaGalaxia.identificador;
+//     // Pede o identificador
+//     cout << "Identificador: ";
+//     cin >> novaGalaxia.identificador;
 
-    // Pede o nome da galáxia (string com espaços)
-    cin.ignore();  // Limpa
-    cout << "Nome da Galáxia: ";
-    getline(cin, novaGalaxia.nome_galaxia);
+//     // Pede o nome da galáxia (string com espaços)
+//     cin.ignore();  // Limpa
+//     cout << "Nome da Galáxia: ";
+//     getline(cin, novaGalaxia.nome_galaxia);
 
-    // Pede o tipo da galáxia (string com espaços)
-    cout << "Tipo da Galáxia: ";
-    getline(cin, novaGalaxia.tipo_galaxia);
+//     // Pede o tipo da galáxia (string com espaços)
+//     cout << "Tipo da Galáxia: ";
+//     getline(cin, novaGalaxia.tipo_galaxia);
 
-    // Pede a magnitude
-    cout << "Magnitude: ";
-    cin >> novaGalaxia.magnitude;
+//     // Pede a magnitude
+//     cout << "Magnitude: ";
+//     cin >> novaGalaxia.magnitude;
 
-    // Pede a constelação (string com espaços)
-    cin.ignore();  // Limpa
-    cout << "Constelação: ";
-    getline(cin, novaGalaxia.constelacao);
+//     // Pede a constelação (string com espaços)
+//     cin.ignore();  // Limpa
+//     cout << "Constelação: ";
+//     getline(cin, novaGalaxia.constelacao);
 
-    // Adiciona a nova galáxia ao vetor
-    galaxias.push_back(novaGalaxia);
+//     // Adiciona a nova galáxia ao vetor
+//     galaxias.push_back(novaGalaxia);
 
-    cout << "Nova galáxia adicionada com sucesso!" << endl;
-}
+//     cout << "Nova galáxia adicionada com sucesso!" << endl;
+// }
 
 void removerGalaxia(vector<Galaxia> &galaxias)
 {
@@ -367,7 +365,7 @@ void exibirListaCompleta(const vector<Galaxia> &galaxias) {
     }
 }
 
-void imprimirIntervalo(const vector<Galaxia> &galaxias) {
+void imprimirIntervalo(Galaxia galaxias[]) {
     
     unsigned inicio, fim;
     cout << "Digite o número do primeiro registro do intervalo: ";
@@ -375,7 +373,7 @@ void imprimirIntervalo(const vector<Galaxia> &galaxias) {
     cout << "Digite o número do último registro do intervalo: ";
     cin >> fim;
     
-    if (inicio < 1 || fim > galaxias.size() || inicio > fim) {
+    if (inicio < 1 || fim > sizeof(galaxias) || inicio > fim) {
         cout << "Intervalo inválido." << endl;
         return;
     }
@@ -391,7 +389,7 @@ void imprimirIntervalo(const vector<Galaxia> &galaxias) {
     }
 }
 
-void ordenarDados(vector<Galaxia>& galaxias, string nome_arquivo_binario) {
+void ordenarDados(Galaxia galaxias[], string nome_arquivo_binario) {
 
     cout << "Ordenador de dados" << endl;
     cout << "É possível ordenar os dados do catálogo com base no valor de todas as colunas, para selecionar\n a coluna referência para ordenação selecione a opção de acordo com o menu abaixo:" << endl;
@@ -436,7 +434,7 @@ void ordenarDados(vector<Galaxia>& galaxias, string nome_arquivo_binario) {
         }
     }
 
-    salvar_dados_bin(galaxias, nome_arquivo_binario);
+    // salvar_dados_bin(galaxias, nome_arquivo_binario);
 
 }
 
@@ -463,6 +461,10 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
     cout << "Bem vindo ao sistema de gerenciamento de informações galácticas!" << endl;
     int escolha = 100;
     bool saved = false;
+    Galaxia galaxias[100];
+
+    //Dados dos arquivos binários
+    string nome_arquivo_binario = "";
 
     while (escolha != 0)
     {
@@ -486,7 +488,7 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
         switch (escolha)
         {
         case 1: // Importar dados de arquivo .csv
-            galaxias = lerCSV(nomeArquivoCSVimport);
+            // lerCSV(galaxias, nomeArquivoCSVimport); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
             break;
         case 2: // Exportar dados para arquivo .csv
             salvarCSV(galaxias, nomeArquivoCSVexport);
@@ -495,23 +497,23 @@ void menu(vector<Galaxia> galaxias, string nomeArquivoCSVimport, string nomeArqu
             cout << "em desenvolvimento" << endl;   
             ordenarDados(galaxias, nome_arquivo_binario);
             break;
-        case 4: // Inserir registro
-            inserirGalaxia(galaxias);
-            break;
-        case 5: // Apagar registro
-            removerGalaxia(galaxias);
-            break;
-        case 6: // Buscar registro
-            buscarGalaxia(galaxias);
-            break;
-        case 7: // Exibir lista completa de registros
-            exibirListaCompleta(galaxias);
-            break;
-        case 8: // Exibir lista parcial de registros
-            imprimirIntervalo(galaxias);
-            break;
-        case 9: // Salvar alterações
-            saved = salvar_dados_bin(galaxias, nome_arquivo_binario);
+        // case 4: // Inserir registro
+        //     inserirGalaxia(galaxias);
+        //     break;
+        // case 5: // Apagar registro
+        //     removerGalaxia(galaxias);
+        //     break;
+        // case 6: // Buscar registro
+        //     buscarGalaxia(galaxias);
+        //     break;
+        // case 7: // Exibir lista completa de registros
+        //     exibirListaCompleta(galaxias);
+        //     break;
+        // case 8: // Exibir lista parcial de registros
+        //     imprimirIntervalo(galaxias);
+        //     break;
+        // case 9: // Salvar alterações
+        //     saved = salvar_dados_bin(galaxias, nome_arquivo_binario);
             break;
         case 0: // Sair do programa
             if (saved != true) {
