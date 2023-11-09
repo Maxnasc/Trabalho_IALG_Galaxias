@@ -131,6 +131,24 @@ void salvarCSV(Galaxia galaxias[], string nomeArquivo)
     }
 }
 
+bool salvar_dados_bin(const vector<Galaxia> &galaxias, const string &nomeArquivoBinario) {
+    ofstream arquivo(nomeArquivoBinario, ios::out | ios::binary);
+
+    if (arquivo.is_open()) {
+        for (const Galaxia &galaxia : galaxias) {
+            // Escreve os dados da galáxia no arquivo binário
+            arquivo.write(reinterpret_cast<const char*>(&galaxia), sizeof(Galaxia));
+        }
+
+        arquivo.close();
+        cout << "Dados salvos com sucesso em " << nomeArquivoBinario << endl;
+        return true; // Indica que os dados foram salvos com sucesso
+    } else {
+        cerr << "Erro ao criar o arquivo binário." << endl;
+        return false; // Indica que houve um erro ao salvar os dados
+    }
+}
+
 void inserirGalaxia(vector<Galaxia> &galaxias)
 {
     Galaxia novaGalaxia;
@@ -349,7 +367,7 @@ void exibirListaCompleta(const vector<Galaxia> &galaxias) {
 
 void imprimirIntervalo(const vector<Galaxia> &galaxias) {
     
-    int inicio, fim;
+    unsigned inicio, fim;
     cout << "Digite o número do primeiro registro do intervalo: ";
     cin >> inicio;
     cout << "Digite o número do último registro do intervalo: ";
@@ -361,7 +379,7 @@ void imprimirIntervalo(const vector<Galaxia> &galaxias) {
     }
 
     cout << "Registros no intervalo [" << inicio << " - " << fim << "]:" << endl;
-    for (int i = inicio - 1; i < fim; i++) {  // Subtrai 1 de 'inicio' para ajustar ao índice base 0
+    for (unsigned i = inicio - 1; i < fim; i++) {  // Subtrai 1 de 'inicio' para ajustar ao índice base 0
         cout << "Identificador: " << galaxias[i].identificador << endl;
         cout << "Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
         cout << "Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
@@ -416,7 +434,7 @@ void ordenarDados(Galaxia& galaxias) {
         }
     }
 
-    salvar_dados_bin(galaxias);
+    salvar_dados_bin(galaxias, nome_arquivo_binario);
 
 }
 
@@ -425,10 +443,20 @@ void salvar_dados_bin(vector<Galaxia>& galaxias) {
 }
 
 void carregar_dados_bin(vector<Galaxia>& galaxias) {
-    // Implementar
-}
+    std::ofstream arquivo(nomeArquivo, std::ios::binary);
 
-void exibe_dados_struct_galaxias () {}
+    if (arquivo.is_open()) {
+        for (const Galaxia &galaxia : galaxias) {
+            // Escreve cada objeto Galaxia no arquivo binário
+            arquivo.write(reinterpret_cast<const char*>(&galaxia), sizeof(Galaxia));
+        }
+
+        arquivo.close();
+        std::cout << "Dados salvos com sucesso em " << nomeArquivo << " (formato binário)." << std::endl;
+    } else {
+        std::cerr << "Erro ao criar o arquivo binário." << std::endl;
+    }
+}
 
 void menu(string nomeArquivoCSVimport, string nomeArquivoCSVexport)
 {
@@ -468,7 +496,7 @@ void menu(string nomeArquivoCSVimport, string nomeArquivoCSVexport)
             break;
         case 3: // Ordenar dados de acordo com característica especificada
             cout << "em desenvolvimento" << endl;   
-            ordenarDados(galaxias);
+            ordenarDados(galaxias, nome_arquivo_binario);
             break;
         case 4: // Inserir registro
             inserirGalaxia(galaxias);
@@ -486,8 +514,7 @@ void menu(string nomeArquivoCSVimport, string nomeArquivoCSVexport)
             imprimirIntervalo(galaxias);
             break;
         case 9: // Salvar alterações
-            cout << "Não implementado" << endl;
-            saved = true; // Melhor ser o retorno da função
+            saved = salvar_dados_bin(galaxias, nome_arquivo_binario);
             break;
         case 0: // Sair do programa
             if (saved != true) {
@@ -508,6 +535,7 @@ int main()
     // Declaração de nomes de arquivos de import e export de .csv
     string nomeArquivoCSVimport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_import.csv";
     string nomeArquivoCSVexport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_export.csv";
+    string nome_arquivo_binario = "dados_binarios.dat";
     //int tamanhoCSV; // Verificador de galáxias cadastradas em arquivos .csv
 
     // Verificar tamanho do arquivo .csv
