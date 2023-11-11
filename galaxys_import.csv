@@ -1,90 +1,90 @@
-Antennae Galaxies,galaxy pair,11.2,Corvus,1
-Aquarius Dwarf,irregular dwarf,14.0,Aquarius,2
-Atoms-for-Peace,peculiar,12.7,Aquarius,3
-Backward Galaxy,unbarred spiral,12.6,Centaurus,4
-Barnard's Galaxy,barred irregular,9.3,Sagittarius,5
-Bear's Paw,compact dwarf,12.3,Lynx,6
-Black Eye Galaxy,spiral,8.5,Coma Berenices,7
-Bode's Galaxy,spiral,6.9,Ursa Major,8
-Burbidge's Chain,galaxy group,14.4,Sculptor,9
-Butterfly Galaxies,unbarred spiral,10.9,Virgo,10
-Carafe Group,galaxy group,9.8,Caelum,11
-Carina Dwarf,spheroidal dwarf,11.3,Carina,12
-Cartwheel Galaxy,lenticular,15.2,Sculptor,13
-Centaurus A,elliptical,6.8,Centaurus,14
-Cetus A,barred spiral,9.6,Cetus,15
-Cigar Galaxy,starburst,8.4,Ursa Major,16
-Circinus Galaxy,Seyfert,12.1,Circinus,17
-Coddington's Nebula,spiral dwarf,12.8,Ursa Major,18
-Coma Cluster,galaxy cluster,12.7,Coma Benerices,19
-Coma Pinwheel Galaxy,spiral,10.4,Coma Benerices,20
-Comet Galaxy,spiral,18.7,Sculptor,21
-Copeland Septet,galaxy group,8.7,Leo,22
-Cosmos Redshift 7,Lyman-alpha emitter,9.6,Sextans,23
-Cygnus A,radio galaxy,16.2,Cygnus,24
-Draco Dwarf,spheroidal,10.9,Draco,25
-Eye of Sauron,Seyfert,11.5,Canes Venatici,26
-Eyes Galaxies,galaxy pair,10.0,Virgo,27
-Fath 703,spiral,11.0,Libra,28
-Fireworks Galaxy,spiral,9.6,Cygnus,29
-Fornax A,lenticular,9.4,Fornax,30
-Fornax Dwarf,elliptical dwarf,9.3,Fornax,31
-Fourcade-Figueroa object,galaxy shred,11.7,Centaurus,32
-Grus Quartet,spiral,8.2,Grus,33
-Hardcastle Nebula,barred spiral,13.3,Centaurus,34
-Helix Galaxy,Seyfert,13.1,Ursa Major,35
-Hercules A,radio galaxy,11.4,Hercules,36
-Hoag's Object,ring,16.2,Serpens,37
-Hockey Stick Galaxy,barred spiral,11.0,Canes Venatici,38
-Hydra A,galaxy cluster,9.6,Hydra,39
-Integral Sign Galaxy,spiral,16.3,Camelopardalis,40
-Keenan's System,spiral/globular,14.4,Ursa Major,41
-Kowal's Object,dwarf,15.5,Sagittarius,42
-Large Magellanic Cloud,spiral,0.9,Dorado,43
-Leo I,spheroidal dwarf,11.2,Leo,44
-Leo II,spheroidal dwarf,12.6,Leo,45
-Leo III,irregular,12.9,Leo,46
-Leo Triplet,galaxy group,8.9,Leo,47
-Lindsay-Shapley Ring,lenticular/ring,14.0,Volans,48
-Little Sombrero Galaxy,spiral,11.6,Pegasus,49
-Maffei I,elliptical,11.1,Cassiopeia,50
-Maffei II,spiral,16.0,Cassiopeia,51
-Malin 1,spiral,15.8,Coma Berenices,52
-Mayall's Object,galaxy pair,7.6,Ursa Major,53
-McLeish's Object,barred spiral,10.7,Virgo,54
-Medusa Merger,galaxy pair,16.3,Ursa Major,55
-Messier 110,elliptical dwarf,8.9,Andromeda,56
-Messier 32,dwarf,8.1,Andromeda,57
-Mice Galaxies,spiral pair,14.5,Coma Berenices,58
-Minkowski's Object,lenticular,12.2,Cetus,59
-Needle Galaxy,spiral,10.4,Coma Berenices,60
-Pegasus Dwarf,irregular dwarf,13.2,Pegasus,61
-Perseus A,Seyfert,12.6,Perseus,62
-Phoenix Dwarf,irregular dwarf,13.1,Phoenix,63
-Pinwheel Galaxy,spiral,7.9,Ursa Major,64
-Pisces Cloud,galaxy group,12.1,Pisces,65
-Pisces Dwarf,irregular dwarf,14.2,Pisces,66
-Reinmuth 80,spiral,12.4,Virgo,67
-Sagittarius Dwarf,elliptical dwarf,4.5,Sagittarius,68
-Sculptor Dwarf Galaxy,elliptical dwarf,10.1,Sculptor,69
-Sculptor Galaxy,spiral,8.0,Sculptor,70
-Seashell Galaxy,galaxy group,14.1,Centaurus,71
-Sextans A,irregular dwarf,11.9,Sextans,72
-Sextans B,irregular dwarf,11.9,Sextans,73
-Seyfert's Sextet,galaxy group,14.7,Serpens,74
-Small Magellanic Cloud,irregular dwarf,2.7,Tucana,75
-Sombrero Galaxy,lenticular,9.0,Virgo,76
-Southern Pinwheel Galaxy,barred spiral,7.5,Hydra,77
-Spindle Galaxy,lenticular,10.7,Draco,78
-Spindle Galaxy,lenticular,9.9,Sextans,79
-Stephan's Quintet,galaxy group,14.4,Pegasus,80
-Sunflower Galaxy,spiral,9.3,Canes Venatici,81
-Tadpole Galaxy,barred spiral,14.4,Draco,82
-The Guitar,galaxy pair,14.5,Ursa Major,83
-Triangulum Galaxy,spiral,5.7,Triangulum,84
-Ursa Minor Dwarf,spheroidal dwarf,11.9,Ursa Minor,85
-Virgo A,elliptical supergiant,8.8,Virgo,86
-Whale galaxy,barred spiral,9.8,Canes Venatici,87
-Whirlpool Galaxy,spiral,8.4,Ursa Major,88
-Wild's Triplet,spiral,6.4,Virgo,89
-Wolf-Lundmark-Melotte,barred irregular,11.0,Cetus,90
+1,Antennae Galaxies,galaxy pair,11.2,Corvus
+2,Aquarius Dwarf,irregular dwarf,14,Aquarius
+3,Atoms-for-Peace,peculiar,12.7,Aquarius
+4,Backward Galaxy,unbarred spiral,12.6,Centaurus
+5,Barnard's Galaxy,barred irregular,9.3,Sagittarius
+6,Bear's Paw,compact dwarf,12.3,Lynx
+7,Black Eye Galaxy,spiral,8.5,Coma Berenices
+8,Bode's Galaxy,spiral,6.9,Ursa Major
+9,Burbidge's Chain,galaxy group,14.4,Sculptor
+10,Butterfly Galaxies,unbarred spiral,10.9,Virgo
+11,Carafe Group,galaxy group,9.8,Caelum
+12,Carina Dwarf,spheroidal dwarf,11.3,Carina
+13,Cartwheel Galaxy,lenticular,15.2,Sculptor
+14,Centaurus A,elliptical,6.8,Centaurus
+15,Cetus A,barred spiral,9.6,Cetus
+16,Cigar Galaxy,starburst,8.4,Ursa Major
+17,Circinus Galaxy,Seyfert,12.1,Circinus
+18,Coddington's Nebula,spiral dwarf,12.8,Ursa Major
+19,Coma Cluster,galaxy cluster,12.7,Coma Benerices
+20,Coma Pinwheel Galaxy,spiral,10.4,Coma Benerices
+21,Comet Galaxy,spiral,18.7,Sculptor
+22,Copeland Septet,galaxy group,8.7,Leo
+23,Cosmos Redshift 7,Lyman-alpha emitter,9.6,Sextans
+24,Cygnus A,radio galaxy,16.2,Cygnus
+25,Draco Dwarf,spheroidal,10.9,Draco
+26,Eye of Sauron,Seyfert,11.5,Canes Venatici
+27,Eyes Galaxies,galaxy pair,10,Virgo
+28,Fath 703,spiral,11,Libra
+29,Fireworks Galaxy,spiral,9.6,Cygnus
+30,Fornax A,lenticular,9.4,Fornax
+31,Fornax Dwarf,elliptical dwarf,9.3,Fornax
+32,Fourcade-Figueroa object,galaxy shred,11.7,Centaurus
+33,Grus Quartet,spiral,8.2,Grus
+34,Hardcastle Nebula,barred spiral,13.3,Centaurus
+35,Helix Galaxy,Seyfert,13.1,Ursa Major
+36,Hercules A,radio galaxy,11.4,Hercules
+37,Hoag's Object,ring,16.2,Serpens
+38,Hockey Stick Galaxy,barred spiral,11,Canes Venatici
+39,Hydra A,galaxy cluster,9.6,Hydra
+40,Integral Sign Galaxy,spiral,16.3,Camelopardalis
+41,Keenan's System,spiral/globular,14.4,Ursa Major
+42,Kowal's Object,dwarf,15.5,Sagittarius
+43,Large Magellanic Cloud,spiral,0.9,Dorado
+44,Leo I,spheroidal dwarf,11.2,Leo
+45,Leo II,spheroidal dwarf,12.6,Leo
+46,Leo III,irregular,12.9,Leo
+47,Leo Triplet,galaxy group,8.9,Leo
+48,Lindsay-Shapley Ring,lenticular/ring,14,Volans
+49,Little Sombrero Galaxy,spiral,11.6,Pegasus
+50,Maffei I,elliptical,11.1,Cassiopeia
+51,Maffei II,spiral,16,Cassiopeia
+52,Malin 1,spiral,15.8,Coma Berenices
+53,Mayall's Object,galaxy pair,7.6,Ursa Major
+54,McLeish's Object,barred spiral,10.7,Virgo
+55,Medusa Merger,galaxy pair,16.3,Ursa Major
+56,Messier 110,elliptical dwarf,8.9,Andromeda
+57,Messier 32,dwarf,8.1,Andromeda
+58,Mice Galaxies,spiral pair,14.5,Coma Berenices
+59,Minkowski's Object,lenticular,12.2,Cetus
+60,Needle Galaxy,spiral,10.4,Coma Berenices
+61,Pegasus Dwarf,irregular dwarf,13.2,Pegasus
+62,Perseus A,Seyfert,12.6,Perseus
+63,Phoenix Dwarf,irregular dwarf,13.1,Phoenix
+64,Pinwheel Galaxy,spiral,7.9,Ursa Major
+65,Pisces Cloud,galaxy group,12.1,Pisces
+66,Pisces Dwarf,irregular dwarf,14.2,Pisces
+67,Reinmuth 80,spiral,12.4,Virgo
+68,Sagittarius Dwarf,elliptical dwarf,4.5,Sagittarius
+69,Sculptor Dwarf Galaxy,elliptical dwarf,10.1,Sculptor
+70,Sculptor Galaxy,spiral,8,Sculptor
+71,Seashell Galaxy,galaxy group,14.1,Centaurus
+72,Sextans A,irregular dwarf,11.9,Sextans
+73,Sextans B,irregular dwarf,11.9,Sextans
+74,Seyfert's Sextet,galaxy group,14.7,Serpens
+75,Small Magellanic Cloud,irregular dwarf,2.7,Tucana
+76,Sombrero Galaxy,lenticular,9,Virgo
+77,Southern Pinwheel Galaxy,barred spiral,7.5,Hydra
+78,Spindle Galaxy,lenticular,10.7,Draco
+79,Spindle Galaxy,lenticular,9.9,Sextans
+80,Stephan's Quintet,galaxy group,14.4,Pegasus
+81,Sunflower Galaxy,spiral,9.3,Canes Venatici
+82,Tadpole Galaxy,barred spiral,14.4,Draco
+83,The Guitar,galaxy pair,14.5,Ursa Major
+84,Triangulum Galaxy,spiral,5.7,Triangulum
+85,Ursa Minor Dwarf,spheroidal dwarf,11.9,Ursa Minor
+86,Virgo A,elliptical supergiant,8.8,Virgo
+87,Whale galaxy,barred spiral,9.8,Canes Venatici
+88,Whirlpool Galaxy,spiral,8.4,Ursa Major
+89,Wild's Triplet,spiral,6.4,Virgo
+90,Wolf-Lundmark-Melotte,barred irregular,11,Cetus
