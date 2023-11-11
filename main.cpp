@@ -521,8 +521,8 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
     while (escolha != 0)
     {   
         cout << endl << "====================================================================" << endl;
-        cout << endl << "==============  Bem vindo ao Catálogo de Galáxias!  ================" << endl;
-        cout << endl << "====================================================================" << endl;
+        cout << endl << "               Bem vindo ao Catálogo de Galáxias!                   " << endl;
+        cout << endl << "====================================================================" << endl << endl;
         cout << "Escolha uma das opções:" << endl;
         cout << "1  -> Importar dados de arquivo .csv" << endl;
         cout << "2  -> Exportar dados para arquivo .csv" << endl;
