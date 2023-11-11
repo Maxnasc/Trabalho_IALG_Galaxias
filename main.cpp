@@ -1,13 +1,26 @@
 /*Trabalho prático
 Introdução a algoritmos
-2023-2
+Período 2023-2
 
-Feito por:
-Cleber Henrique Silva Junior - 201910660
-Marcos Tadeu Xavier Ferreira - 201910448
-Max Deivid do Nascimento - 201910445
+Grupo 15
+Integrantes:
+    Cleber Henrique Silva Junior - 201910660
+    Marcos Tadeu Xavier Ferreira - 201910448
+    Max Deivid do Nascimento - 201910445
+
+Tema: Catálogo de galáxias
+Campos: 1. Identificador no catálogo (int)
+        2. Nome da galáxia (string com espaços)
+        3. Tipo da galáxia (string com espaços)
+        4. Magnitude (float)
+        5. Constelação (string com espaços)
+
+Este trabalho se tarata da criação de um sistema de catálogo de galáxias para astrônomos slavarem as informações
+a respeito de qual constelação a galáxia pertence, seu tipo, magnitude e nome. O sistema deve ser capaz de ler e 
+escrever no arquivo do catálogo, faser buscas, ordenar os dados e salvar as alterações feitas no arquivo.
 */
 
+// Bibliotecas utilizadas
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -15,8 +28,10 @@ Max Deivid do Nascimento - 201910445
 #include <cstring>
 #include <sstream>
 
+// Declaração de namespace
 using namespace std;
 
+// Declaração de struct para armazenar os dados das galáxias
 struct Galaxia
 {
     // 1. Identificador no catálogo (int)
@@ -31,6 +46,7 @@ struct Galaxia
     string constelacao = "";
 };
 
+// Função que verifica o tamanho do arquivo CSV
 int verificarTamanhoArquivoCSV(const string &nomeArquivo)
 {
     ifstream arquivo(nomeArquivo);
@@ -56,6 +72,7 @@ int verificarTamanhoArquivoCSV(const string &nomeArquivo)
     }
 }
 
+// Função que lê o arquivo CSV e armazena os dados em um vetor de galáxias
 void lerCSV(Galaxia galaxias[], const string &nomeArquivo)
 {
     ifstream arquivo(nomeArquivo);
@@ -107,6 +124,7 @@ void lerCSV(Galaxia galaxias[], const string &nomeArquivo)
 
 }
 
+// Função que salva os dados do vetor de galáxias em um arquivo CSV
 void salvarCSV(Galaxia galaxias[], string nomeArquivo, int tamanhoArquivo)
 {
     ofstream arquivo(nomeArquivo);
@@ -134,6 +152,7 @@ void salvarCSV(Galaxia galaxias[], string nomeArquivo, int tamanhoArquivo)
     }
 }
 
+// Função que salva os dados do vetor de galáxias em um arquivo binário
 bool salvar_dados_bin(Galaxia galaxias[], const string &nomeArquivoBinario, int tamanhoArquivo) {
     ofstream arquivo(nomeArquivoBinario, ios::out | ios::binary);
 
@@ -152,6 +171,7 @@ bool salvar_dados_bin(Galaxia galaxias[], const string &nomeArquivoBinario, int 
     }
 }
 
+// Função que insere uma nova galáxia no vetor de galáxias
 void inserirGalaxia(Galaxia galaxias[], int tamanhoArquivo)
 {
     Galaxia novaGalaxia;
@@ -195,6 +215,7 @@ void inserirGalaxia(Galaxia galaxias[], int tamanhoArquivo)
     
 }
 
+// Função que remove uma galáxia do vetor de galáxias
 void removerGalaxia(Galaxia galaxias[], int tamanhoArquivo)
 {
     int identificadorParaRemover;
@@ -223,6 +244,7 @@ void removerGalaxia(Galaxia galaxias[], int tamanhoArquivo)
     cout << "Galáxia com identificador " << identificadorParaRemover << " não encontrada." << endl;
 }
 
+// Função que busca uma galáxia no vetor de galáxias
 void buscarGalaxia(Galaxia galaxias[], int tamanhoArquivo)
 {
     int opcaoBusca;
@@ -364,6 +386,7 @@ void buscarGalaxia(Galaxia galaxias[], int tamanhoArquivo)
     }
 }
 
+// Função que exibe a lista completa de galáxias
 void exibirListaCompleta(Galaxia galaxias[], int tamanhoArquivo) {
     if (galaxias[0].nome_galaxia == "vazio") {
         cout << "Nenhuma galáxia cadastrada." << endl;
@@ -383,6 +406,7 @@ void exibirListaCompleta(Galaxia galaxias[], int tamanhoArquivo) {
     }
 }
 
+// Função que exibe uma lista parcial de galáxias
 void imprimirIntervalo(Galaxia galaxias[], int tamanhoArquivo) {
     
     unsigned inicio, fim;
@@ -407,6 +431,7 @@ void imprimirIntervalo(Galaxia galaxias[], int tamanhoArquivo) {
     }
 }
 
+// Função que ordena os dados do vetor de galáxias utilizando o método Bubble Sort
 void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
 
     cout << "Ordenador de dados" << endl;
@@ -453,6 +478,7 @@ void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
 
 }
 
+// Função que carrega os dados do arquivo binário para o vetor de galáxias
 void carregar_dados_bin(Galaxia galaxias[], string nomeArquivo, int tamanhoArquivo) {
     ifstream arquivo(nomeArquivo, std::ios::binary);
 
@@ -470,6 +496,7 @@ void carregar_dados_bin(Galaxia galaxias[], string nomeArquivo, int tamanhoArqui
     }
 }
 
+// Função que exibe o menu principal do programa
 void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSVexport, string nome_arquivo_binario)
 {
 
@@ -492,7 +519,9 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
     //Dados dos arquivos binários
 
     while (escolha != 0)
-    {
+    {   
+        cout << endl << "====================================================================" << endl;
+        cout << endl << "==============  Bem vindo ao Catálogo de Galáxias!  ================" << endl;
         cout << endl << "====================================================================" << endl;
         cout << "Escolha uma das opções:" << endl;
         cout << "1  -> Importar dados de arquivo .csv" << endl;
@@ -560,9 +589,11 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
     }
 }
 
+// Função principal
 int main()
 {
     // Declaração de nomes de arquivos de import e export de .csv
+    // Necessário alterar o diretório para o local onde os arquivos estão salvos
     string nomeArquivoCSVimport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_import.csv";
     string nomeArquivoCSVexport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_export.csv";
     string nome_arquivo_binario = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/dados_binarios.dat";
