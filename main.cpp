@@ -407,7 +407,7 @@ void imprimirIntervalo(Galaxia galaxias[], int tamanhoArquivo) {
     }
 }
 
-void ordenarDados(Galaxia galaxias[], string nome_arquivo_binario, int tamanhoArquivo) {
+void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
 
     cout << "Ordenador de dados" << endl;
     cout << "É possível ordenar os dados do catálogo com base no valor de todas as colunas, para selecionar\n a coluna referência para ordenação selecione a opção de acordo com o menu abaixo:" << endl;
@@ -450,8 +450,6 @@ void ordenarDados(Galaxia galaxias[], string nome_arquivo_binario, int tamanhoAr
             }
         }
     }
-
-    // salvar_dados_bin(galaxias, nome_arquivo_binario);
 
 }
 
@@ -523,13 +521,19 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
             salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
             break;
         case 3: // Ordenar dados de acordo com característica especificada 
-            ordenarDados(galaxias, nome_arquivo_binario, tamanhoArquivo);
+            ordenarDados(galaxias, tamanhoArquivo);
+            salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
+            salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
             break;
         case 4: // Inserir registro
             inserirGalaxia(galaxias, tamanhoArquivo);
+            salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
+            salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
             break;
         case 5: // Apagar registro
             removerGalaxia(galaxias, tamanhoArquivo);
+            salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
+            salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
             break;
         case 6: // Buscar registro
             buscarGalaxia(galaxias, tamanhoArquivo);
@@ -563,23 +567,8 @@ int main()
     string nomeArquivoCSVexport = "galaxys_export.csv";
     string nome_arquivo_binario = "dados_binarios.dat";
     int tamanhoArquivo = 150;
-    //int tamanhoCSV; // Verificador de galáxias cadastradas em arquivos .csv
-
-    // Verificar tamanho do arquivo .csv
-    // tamanhoCSV = verificarTamanhoArquivoCSV(nomeArquivoCSVimport);
-    // cout << tamanhoCSV << endl;
-
-    // Struct de dados
     
     menu(tamanhoArquivo, nomeArquivoCSVimport, nomeArquivoCSVexport, nome_arquivo_binario);
-    // for (const Galaxia& galaxia : galaxias) {
-    //     cout << "Identificador: " << galaxia.identificador << endl;
-    //     cout << "Nome da Galáxia: " << galaxia.nome_galaxia << endl;
-    //     cout << "Tipo da Galáxia: " << galaxia.tipo_galaxia << endl;
-    //     cout << "Magnitude: " << galaxia.magnitude << endl;
-    //     cout << "Constelação: " << galaxia.constelacao << endl;
-    //     cout << endl;
-    // }
 
     return 0;
 }
