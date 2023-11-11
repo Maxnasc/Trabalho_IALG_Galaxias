@@ -563,9 +563,9 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
 int main()
 {
     // Declaração de nomes de arquivos de import e export de .csv
-    string nomeArquivoCSVimport = "galaxys_import.csv";
-    string nomeArquivoCSVexport = "galaxys_export.csv";
-    string nome_arquivo_binario = "dados_binarios.dat";
+    string nomeArquivoCSVimport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_import.csv";
+    string nomeArquivoCSVexport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_export.csv";
+    string nome_arquivo_binario = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/dados_binarios.dat";
     int tamanhoArquivo = 150;
     
     menu(tamanhoArquivo, nomeArquivoCSVimport, nomeArquivoCSVexport, nome_arquivo_binario);
