@@ -2,7 +2,7 @@
 Introdução a algoritmos
 Período 2023-2
 
-Grupo 15
+--> GRUPO 15
 Integrantes:
     Cleber Henrique Silva Junior - 201910660
     Marcos Tadeu Xavier Ferreira - 201910448
