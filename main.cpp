@@ -455,25 +455,22 @@ void ordenarDados(Galaxia galaxias[], string nome_arquivo_binario, int tamanhoAr
 
 }
 
-void salvar_dados_bin(vector<Galaxia>& galaxias) {
-    // Implementarlear
+void carregar_dados_bin(Galaxia galaxias[], string nomeArquivo, int tamanhoArquivo) {
+    ifstream arquivo(nomeArquivo, std::ios::binary);
+
+    if (arquivo.is_open()) {
+        for (int i=0; i<tamanhoArquivo; i++) {
+            // Escreve cada objeto Galaxia no arquivo binário
+            arquivo.read(reinterpret_cast<char*>(&galaxias[i]), sizeof(Galaxia));
+        }
+
+        arquivo.close();
+        cout << "Dados carregados com sucesso" << endl;
+        } 
+    else {
+        cout << "Erro ao carregar o arquivo binário." << endl;
+    }
 }
-
-// void carregar_dados_bin(vector<Galaxia>& galaxias) {
-//     std::ofstream arquivo(nomeArquivo, std::ios::binary);
-
-//     if (arquivo.is_open()) {
-//         for (const Galaxia &galaxia : galaxias) {
-//             // Escreve cada objeto Galaxia no arquivo binário
-//             arquivo.write(reinterpret_cast<const char*>(&galaxia), sizeof(Galaxia));
-//         }
-
-//         arquivo.close();
-//         std::cout << "Dados salvos com sucesso em " << nomeArquivo << " (formato binário)." << std::endl;
-//     } else {
-//         std::cerr << "Erro ao criar o arquivo binário." << std::endl;
-//     }
-// }
 
 void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSVexport, string nome_arquivo_binario)
 {
