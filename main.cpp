@@ -548,7 +548,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
             break;
         case 0: // Sair do programa
             if (saved != true) {
-                salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
             }
             cout << endl << "Obrigado! :)" << endl;
             break;
