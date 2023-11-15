@@ -503,6 +503,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
     cout << "Bem vindo ao sistema de gerenciamento de informações galácticas!" << endl;
     int escolha = 100;
     bool saved = false;
+    string sairSemSalvar = "a";
     Galaxia empty_galaxy;
     empty_galaxy.constelacao = "vazio";
     empty_galaxy.identificador = 99999;
@@ -579,7 +580,15 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
             break;
         case 0: // Sair do programa
             if (saved != true) {
-                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                cout << "Deseja sair sem salvar os dados (Y/N) ?" << endl;
+                cin >> sairSemSalvar;
+                if ((sairSemSalvar == "Y") or (sairSemSalvar == "y")) {
+                    saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                    cout << endl << "Obrigado! :)" << endl;
+                } else if  ((sairSemSalvar == "N") or (sairSemSalvar == "n")) {
+                     cout << endl << "Saindo sem salvar os dados!\nObrigado! :)" << endl;
+                }
+                
             }
             cout << endl << "Obrigado! :)" << endl;
             break;
