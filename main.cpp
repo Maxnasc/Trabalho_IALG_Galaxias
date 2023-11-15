@@ -121,7 +121,6 @@ void lerCSV(Galaxia galaxias[], const string &nomeArquivo)
     {
         cerr << "Erro ao abrir o arquivo." << endl;
     }
-
 }
 
 // Função que salva os dados do vetor de galáxias em um arquivo CSV
@@ -516,6 +515,8 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
         galaxias[i] = empty_galaxy;
     }
 
+
+
     //Dados dos arquivos binários
 
     while (escolha != 0)
@@ -539,7 +540,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
         cin >> escolha;
         cout << endl;
         
-        //carregar_dados_bin(galaxias, nome_arquivo_binario);
+        carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
 
         switch (escolha)
         {
