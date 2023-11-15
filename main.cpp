@@ -555,16 +555,19 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
             ordenarDados(galaxias, tamanhoArquivo);
             salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
             salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+            saved = false;
             break;
         case 4: // Inserir registro
             inserirGalaxia(galaxias, tamanhoArquivo);
             salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
             salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+            saved = false;
             break;
         case 5: // Apagar registro
             removerGalaxia(galaxias, tamanhoArquivo);
             salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
             salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+            saved = false;
             break;
         case 6: // Buscar registro
             buscarGalaxia(galaxias, tamanhoArquivo);
