@@ -588,7 +588,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
                 if ((sairSemSalvar == "Y") or (sairSemSalvar == "y")) {
                     saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
                     cout << endl << "Obrigado! :)" << endl;
-                } else if  ((sairSemSalvar == "N") or (sairSemSalvar == "n")) {
+                } else {
                      cout << endl << "Saindo sem salvar os dados!\nObrigado! :)" << endl;
                 }
                 
