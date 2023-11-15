@@ -591,9 +591,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
                 } else {
                      cout << endl << "Saindo sem salvar os dados!\nObrigado! :)" << endl;
                 }
-                
             }
-            cout << endl << "Obrigado! :)" << endl;
             break;
         default:
             cout << "Opção não disponível" << endl;
