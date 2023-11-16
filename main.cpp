@@ -27,6 +27,7 @@ escrever no arquivo do catálogo, faser buscas, ordenar os dados e salvar as alt
 #include <vector>
 #include <cstring>
 #include <sstream>
+#include <algorithm>
 
 // Declaração de namespace
 using namespace std;
@@ -214,34 +215,46 @@ void inserirGalaxia(Galaxia galaxias[], int tamanhoArquivo)
     
 }
 
-// Função que remove uma galáxia do vetor de galáxias
-void removerGalaxia(Galaxia galaxias[], int tamanhoArquivo)
+// Função que remove uma galáxia do arquivo binário
+void removerGalaxia(const string &nomeArquivoBinario)
 {
     int identificadorParaRemover;
-    
+
     // Solicita o identificador da galáxia a ser removida
     cout << "Digite o identificador da galáxia que deseja remover: ";
     cin >> identificadorParaRemover;
-    
-    // Procura a galáxia no vetor pelo identificador
-    for (int i=0; i<tamanhoArquivo; i++)
+
+    // Abre o arquivo binário em modo de leitura e escrita
+    fstream arquivoBinario(nomeArquivoBinario, ios::binary | ios::in | ios::out);
+
+    if (!arquivoBinario)
     {
-        if (galaxias[i].identificador == identificadorParaRemover)
+        cerr << "Erro ao abrir o arquivo binário." << endl;
+        return;
+    }
+
+    // Procura a galáxia no arquivo pelo identificador
+    Galaxia galaxia;
+    while (arquivoBinario.read(reinterpret_cast<char*>(&galaxia), sizeof(Galaxia)))
+    {
+        if (galaxia.identificador == identificadorParaRemover)
         {
-            // Remove efetivamente a galáxia do vetor
-            galaxias[i].identificador = 99999;
-            galaxias[i].magnitude = 0;
-            galaxias[i].nome_galaxia = "vazio";
-            galaxias[i].tipo_galaxia = "vazio";
-            galaxias[i].constelacao = "vazio";
+            // Marca a galáxia como removida no arquivo
+            galaxia.identificador = -1;  // Usando -1 como marcação de remoção lógica
+            arquivoBinario.seekp(-static_cast<int>(sizeof(Galaxia)), ios::cur);  // Volta para a posição antes da leitura
+            arquivoBinario.write(reinterpret_cast<char*>(&galaxia), sizeof(Galaxia));  // Escreve a galáxia modificada
             cout << "Galáxia removida com sucesso!" << endl;
+            arquivoBinario.close();
             return;  // Sai da função após a remoção
         }
     }
-    
+
     // Se o identificador não for encontrado
     cout << "Galáxia com identificador " << identificadorParaRemover << " não encontrada." << endl;
+
+    arquivoBinario.close();
 }
+
 
 // Função que busca uma galáxia no vetor de galáxias
 void buscarGalaxia(Galaxia galaxias[], int tamanhoArquivo)
@@ -430,6 +443,12 @@ void imprimirIntervalo(Galaxia galaxias[], int tamanhoArquivo) {
     }
 }
 
+// Função que verifica se uma galáxia foi marcada para remoção lógica
+bool marcadoParaRemover(const Galaxia& galaxia)
+{
+    return galaxia.identificador < 0;
+}
+
 // Função que ordena os dados do vetor de galáxias utilizando o método Bubble Sort
 void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
 
@@ -444,25 +463,30 @@ void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
     int criterio = 0;
     cin >> criterio;
 
+    // Bubble Sort
     for (int i = 0; i < tamanhoArquivo - 1; i++) {
         for (int j = 0; j < tamanhoArquivo - i - 1; j++) {
             bool trocar = false;
 
+            // Verifica se as galáxias estão marcadas para remoção lógica
+            bool marcadoParaRemoverI = marcadoParaRemover(galaxias[j]);
+            bool marcadoParaRemoverJ = marcadoParaRemover(galaxias[j + 1]);
+
             switch (criterio) {
                 case 1:
-                    trocar = galaxias[j].identificador > galaxias[j + 1].identificador;
+                    trocar = (!marcadoParaRemoverI && (marcadoParaRemoverJ || galaxias[j].identificador > galaxias[j + 1].identificador));
                     break;
                 case 2:
-                    trocar = galaxias[j].nome_galaxia > galaxias[j + 1].nome_galaxia;
+                    trocar = (!marcadoParaRemoverI && (marcadoParaRemoverJ || galaxias[j].nome_galaxia > galaxias[j + 1].nome_galaxia));
                     break;
                 case 3:
-                    trocar = galaxias[j].tipo_galaxia > galaxias[j + 1].tipo_galaxia;
+                    trocar = (!marcadoParaRemoverI && (marcadoParaRemoverJ || galaxias[j].tipo_galaxia > galaxias[j + 1].tipo_galaxia));
                     break;
                 case 4:
-                    trocar = galaxias[j].magnitude > galaxias[j + 1].magnitude;
+                    trocar = (!marcadoParaRemoverI && (marcadoParaRemoverJ || galaxias[j].magnitude > galaxias[j + 1].magnitude));
                     break;
                 case 5:
-                    trocar = galaxias[j].constelacao > galaxias[j + 1].constelacao;
+                    trocar = (!marcadoParaRemoverI && (marcadoParaRemoverJ || galaxias[j].constelacao > galaxias[j + 1].constelacao));
                     break;
                 default:
                     cerr << "Critério de seleção inválido." << endl;
@@ -474,7 +498,6 @@ void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
             }
         }
     }
-
 }
 
 // Função que carrega os dados do arquivo binário para o vetor de galáxias
@@ -564,9 +587,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
             saved = false;
             break;
         case 5: // Apagar registro
-            removerGalaxia(galaxias, tamanhoArquivo);
-            salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
-            salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+            removerGalaxia(nome_arquivo_binario);
             saved = false;
             break;
         case 6: // Buscar registro
