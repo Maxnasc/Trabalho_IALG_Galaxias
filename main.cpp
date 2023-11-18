@@ -612,7 +612,6 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
             break;
         case 4: // Inserir registro
             inserirGalaxia(galaxias, tamanhoArquivo);
-            salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
             salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
             saved = false;
             break;
