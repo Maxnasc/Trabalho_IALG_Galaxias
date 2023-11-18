@@ -449,9 +449,60 @@ bool marcadoParaRemover(const Galaxia& galaxia)
     return galaxia.identificador < 0;
 }
 
-// Função que ordena os dados do vetor de galáxias utilizando o método Bubble Sort
-void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
+// Função auxiliar para particionar o vetor para o QuickSort
+int particionar(Galaxia galaxias[], int baixo, int alto, int criterio) {
+    Galaxia pivo = galaxias[alto];
+    int i = baixo - 1;
 
+    for (int j = baixo; j <= alto - 1; j++) {
+        bool trocar = false;
+
+        // Verifica se as galáxias estão marcadas para remoção lógica
+        bool marcadoParaRemoverJ = marcadoParaRemover(galaxias[j]);
+
+        switch (criterio) {
+            case 1:
+                trocar = (!marcadoParaRemoverJ && galaxias[j].identificador <= pivo.identificador);
+                break;
+            case 2:
+                trocar = (!marcadoParaRemoverJ && galaxias[j].nome_galaxia <= pivo.nome_galaxia);
+                break;
+            case 3:
+                trocar = (!marcadoParaRemoverJ && galaxias[j].tipo_galaxia <= pivo.tipo_galaxia);
+                break;
+            case 4:
+                trocar = (!marcadoParaRemoverJ && galaxias[j].magnitude <= pivo.magnitude);
+                break;
+            case 5:
+                trocar = (!marcadoParaRemoverJ && galaxias[j].constelacao <= pivo.constelacao);
+                break;
+            default:
+                cerr << "Critério de seleção inválido." << endl;
+                return 0;
+        }
+
+        if (trocar) {
+            i++;
+            swap(galaxias[i], galaxias[j]);
+        }
+    }
+
+    swap(galaxias[i + 1], galaxias[alto]);
+    return i + 1;
+}
+
+// Função principal do QuickSort
+void quickSort(Galaxia galaxias[], int baixo, int alto, int criterio) {
+    if (baixo < alto) {
+        int pi = particionar(galaxias, baixo, alto, criterio);
+
+        quickSort(galaxias, baixo, pi - 1, criterio);
+        quickSort(galaxias, pi + 1, alto, criterio);
+    }
+}
+
+// Função que ordena os dados do vetor de galáxias utilizando o método QuickSort
+void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
     cout << "Ordenador de dados" << endl;
     cout << "É possível ordenar os dados do catálogo com base no valor de todas as colunas, para selecionar\n a coluna referência para ordenação selecione a opção de acordo com o menu abaixo:" << endl;
     cout << "1 -> Por identificador" << endl;
@@ -463,41 +514,7 @@ void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
     int criterio = 0;
     cin >> criterio;
 
-    // Bubble Sort
-    for (int i = 0; i < tamanhoArquivo - 1; i++) {
-        for (int j = 0; j < tamanhoArquivo - i - 1; j++) {
-            bool trocar = false;
-
-            // Verifica se as galáxias estão marcadas para remoção lógica
-            bool marcadoParaRemoverI = marcadoParaRemover(galaxias[j]);
-            bool marcadoParaRemoverJ = marcadoParaRemover(galaxias[j + 1]);
-
-            switch (criterio) {
-                case 1:
-                    trocar = (!marcadoParaRemoverI && (marcadoParaRemoverJ || galaxias[j].identificador > galaxias[j + 1].identificador));
-                    break;
-                case 2:
-                    trocar = (!marcadoParaRemoverI && (marcadoParaRemoverJ || galaxias[j].nome_galaxia > galaxias[j + 1].nome_galaxia));
-                    break;
-                case 3:
-                    trocar = (!marcadoParaRemoverI && (marcadoParaRemoverJ || galaxias[j].tipo_galaxia > galaxias[j + 1].tipo_galaxia));
-                    break;
-                case 4:
-                    trocar = (!marcadoParaRemoverI && (marcadoParaRemoverJ || galaxias[j].magnitude > galaxias[j + 1].magnitude));
-                    break;
-                case 5:
-                    trocar = (!marcadoParaRemoverI && (marcadoParaRemoverJ || galaxias[j].constelacao > galaxias[j + 1].constelacao));
-                    break;
-                default:
-                    cerr << "Critério de seleção inválido." << endl;
-                    return;
-            }
-
-            if (trocar) {
-                swap(galaxias[j], galaxias[j + 1]);
-            }
-        }
-    }
+    quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
 }
 
 // Função que carrega os dados do arquivo binário para o vetor de galáxias
