@@ -201,19 +201,18 @@ void inserirGalaxia(Galaxia galaxias[], int tamanhoArquivo)
     cout << "Constelação: ";
     getline(cin, novaGalaxia.constelacao);
 
-    // Adiciona a nova galáxia ao vetor
-    for (int i=0; i<tamanhoArquivo; i++) {
-        if (galaxias[i].nome_galaxia == "vazio") {
+    // Busca por espaços vazios ou registros marcados para remoção
+    for (int i = 0; i < tamanhoArquivo; i++) {
+        if (galaxias[i].nome_galaxia == "vazio" || galaxias[i].identificador == -1) {
             galaxias[i] = novaGalaxia;
             cout << "Nova galáxia adicionada com sucesso!" << endl;
-            break;
-        } else if (i == (tamanhoArquivo-1)) {
-            cout << "Não há mais espaço para adicionar galáxias" << endl;
+            return;
         }
     }
-
+    cout << "Não há mais espaço para adicionar galáxias" << endl;
     
 }
+
 
 // Função que remove uma galáxia do arquivo binário
 void removerGalaxia(const string &nomeArquivoBinario)
