@@ -576,7 +576,6 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
             break;
         case 3: // Ordenar dados de acordo com característica especificada 
             ordenarDados(galaxias, tamanhoArquivo);
-            salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
             salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
             saved = false;
             break;
