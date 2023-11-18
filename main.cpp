@@ -464,17 +464,8 @@ int particionar(Galaxia galaxias[], int baixo, int alto, int criterio) {
             case 1:
                 trocar = (!marcadoParaRemoverJ && galaxias[j].identificador <= pivo.identificador);
                 break;
-            case 2:
-                trocar = (!marcadoParaRemoverJ && galaxias[j].nome_galaxia <= pivo.nome_galaxia);
-                break;
-            case 3:
-                trocar = (!marcadoParaRemoverJ && galaxias[j].tipo_galaxia <= pivo.tipo_galaxia);
-                break;
             case 4:
                 trocar = (!marcadoParaRemoverJ && galaxias[j].magnitude <= pivo.magnitude);
-                break;
-            case 5:
-                trocar = (!marcadoParaRemoverJ && galaxias[j].constelacao <= pivo.constelacao);
                 break;
             default:
                 cerr << "Critério de seleção inválido." << endl;
@@ -514,7 +505,32 @@ void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
     int criterio = 0;
     cin >> criterio;
 
-    quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
+    switch (criterio) {
+        case 1:
+            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
+            break;
+        case 2:
+            sort(galaxias, galaxias + tamanhoArquivo, [](const Galaxia& a, const Galaxia& b) {
+                return a.nome_galaxia < b.nome_galaxia;
+            });
+            break;
+        case 3:
+            sort(galaxias, galaxias + tamanhoArquivo, [](const Galaxia& a, const Galaxia& b) {
+                return a.tipo_galaxia < b.tipo_galaxia;
+            });
+            break;
+        case 4:
+            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
+            break;
+        case 5:
+            sort(galaxias, galaxias + tamanhoArquivo, [](const Galaxia& a, const Galaxia& b) {
+                return a.constelacao < b.constelacao;
+            });
+            break;
+        default:
+            cerr << "Critério de seleção inválido." << endl;
+            return;
+    }
 }
 
 // Função que carrega os dados do arquivo binário para o vetor de galáxias
