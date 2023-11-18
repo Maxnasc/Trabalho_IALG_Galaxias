@@ -420,7 +420,7 @@ void exibirListaCompleta(Galaxia galaxias[], int tamanhoArquivo) {
 // Função que exibe uma lista parcial de galáxias
 void imprimirIntervalo(Galaxia galaxias[], int tamanhoArquivo) {
     
-    unsigned inicio, fim;
+    int inicio, fim;
     cout << "Digite o número do primeiro registro do intervalo: ";
     cin >> inicio;
     cout << "Digite o número do último registro do intervalo: ";
@@ -432,7 +432,7 @@ void imprimirIntervalo(Galaxia galaxias[], int tamanhoArquivo) {
     }
 
     cout << "Registros no intervalo [" << inicio << " - " << fim << "]:" << endl;
-    for (unsigned i = inicio - 1; i < fim; i++) {  // Subtrai 1 de 'inicio' para ajustar ao índice base 0
+    for (int i = inicio - 1; i < fim; i++) {  // Subtrai 1 de 'inicio' para ajustar ao índice base 0
         cout << "Identificador: " << galaxias[i].identificador << endl;
         cout << "Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
         cout << "Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
@@ -555,7 +555,9 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
 {
 
     // Bloco de indicação de quais as funções disponíveis para o usuário
-    cout << "Bem vindo ao sistema de gerenciamento de informações galácticas!" << endl;
+    cout << endl << "====================================================================" << endl;
+    cout << endl << "               Bem vindo ao Catálogo de Galáxias!                   " << endl;
+    cout << endl << "====================================================================" << endl << endl;
     int escolha = 100;
     bool saved = false;
     string sairSemSalvar = "a";
@@ -577,9 +579,6 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
 
     while (escolha != 0)
     {   
-        cout << endl << "====================================================================" << endl;
-        cout << endl << "               Bem vindo ao Catálogo de Galáxias!                   " << endl;
-        cout << endl << "====================================================================" << endl << endl;
         cout << "Escolha uma das opções:" << endl;
         cout << "1  -> Importar dados de arquivo .csv" << endl;
         cout << "2  -> Exportar dados para arquivo .csv" << endl;
