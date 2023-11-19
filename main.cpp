@@ -399,7 +399,7 @@ void buscarGalaxia(Galaxia galaxias[], int tamanhoArquivo)
 
 // Função que exibe a lista completa de galáxias
 void exibirListaCompleta(Galaxia galaxias[], int tamanhoArquivo) {
-    if ((galaxias[0].nome_galaxia == "vazio")&&(galaxias[90].nome_galaxia == "vazio")&&(galaxias[45].nome_galaxia == "vazio"))) {
+    if ((galaxias[0].nome_galaxia == "vazio")&&(galaxias[90].nome_galaxia == "vazio")&&(galaxias[45].nome_galaxia == "vazio")) {
         cout << endl << " Nenhuma galáxia cadastrada." << endl;
         return;
     }
