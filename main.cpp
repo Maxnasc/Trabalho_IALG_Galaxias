@@ -68,7 +68,7 @@ int verificarTamanhoArquivoCSV(const string &nomeArquivo)
     }
     else
     {
-        cerr << "Erro ao abrir o arquivo." << endl;
+        cerr << endl << " Erro ao abrir o arquivo." << endl;
         return -1; // Retorna -1 em caso de erro
     }
 }
@@ -115,12 +115,12 @@ void lerCSV(Galaxia galaxias[], const string &nomeArquivo)
             index++;
 
         }
-        cout << "Arquivo lido com sucesso!" << endl;
+        cout << endl <<" Arquivo lido com sucesso!" << endl;
         arquivo.close();
     }
     else
     {
-        cerr << "Erro ao abrir o arquivo." << endl;
+        cerr << endl <<" Erro ao abrir o arquivo." << endl;
     }
 }
 
@@ -144,11 +144,11 @@ void salvarCSV(Galaxia galaxias[], string nomeArquivo, int tamanhoArquivo)
         }
 
         arquivo.close();
-        cout << "Dados salvos com sucesso em " << nomeArquivo << endl;
+        cout << endl << " Dados salvos com sucesso em " << nomeArquivo << endl;
     }
     else
     {
-        cerr << "Erro ao criar o arquivo." << endl;
+        cerr << endl << " Erro ao criar o arquivo." << endl;
     }
 }
 
@@ -163,10 +163,10 @@ bool salvar_dados_bin(Galaxia galaxias[], const string &nomeArquivoBinario, int 
         }
 
         arquivo.close();
-        cout << "Dados salvos com sucesso em " << nomeArquivoBinario << endl;
+        cout << endl <<" Dados salvos com sucesso em " << nomeArquivoBinario << endl;
         return true; // Indica que os dados foram salvos com sucesso
     } else {
-        cerr << "Erro ao criar o arquivo binário." << endl;
+        cerr << endl <<" Erro ao criar o arquivo binário." << endl;
         return false; // Indica que houve um erro ao salvar os dados
     }
 }
@@ -205,11 +205,11 @@ void inserirGalaxia(Galaxia galaxias[], int tamanhoArquivo)
     for (int i = 0; i < tamanhoArquivo; i++) {
         if (galaxias[i].nome_galaxia == "vazio" || galaxias[i].identificador == -1) {
             galaxias[i] = novaGalaxia;
-            cout << "Nova galáxia adicionada com sucesso!" << endl;
+            cout << endl << " Nova galáxia adicionada com sucesso!" << endl;
             return;
         }
     }
-    cout << "Não há mais espaço para adicionar galáxias" << endl;
+    cout << endl << " Não há mais espaço para adicionar galáxias" << endl;
     
 }
 
@@ -220,7 +220,7 @@ void removerGalaxia(const string &nomeArquivoBinario)
     int identificadorParaRemover;
 
     // Solicita o identificador da galáxia a ser removida
-    cout << "Digite o identificador da galáxia que deseja remover: ";
+    cout << endl <<" Digite o identificador da galáxia que deseja remover: ";
     cin >> identificadorParaRemover;
 
     // Abre o arquivo binário em modo de leitura e escrita
@@ -228,7 +228,7 @@ void removerGalaxia(const string &nomeArquivoBinario)
 
     if (!arquivoBinario)
     {
-        cerr << "Erro ao abrir o arquivo binário." << endl;
+        cerr << endl <<" Erro ao abrir o arquivo binário." << endl;
         return;
     }
 
@@ -242,14 +242,14 @@ void removerGalaxia(const string &nomeArquivoBinario)
             galaxia.identificador = -1;  // Usando -1 como marcação de remoção lógica
             arquivoBinario.seekp(-static_cast<int>(sizeof(Galaxia)), ios::cur);  // Volta para a posição antes da leitura
             arquivoBinario.write(reinterpret_cast<char*>(&galaxia), sizeof(Galaxia));  // Escreve a galáxia modificada
-            cout << "Galáxia removida com sucesso!" << endl;
+            cout << endl <<" Galáxia removida com sucesso!" << endl;
             arquivoBinario.close();
             return;  // Sai da função após a remoção
         }
     }
 
     // Se o identificador não for encontrado
-    cout << "Galáxia com identificador " << identificadorParaRemover << " não encontrada." << endl;
+    cout << endl <<" Galáxia com identificador " << identificadorParaRemover << " não encontrada." << endl;
 
     arquivoBinario.close();
 }
@@ -261,13 +261,13 @@ void buscarGalaxia(Galaxia galaxias[], int tamanhoArquivo)
     int opcaoBusca;
 
     // Menu para escolher o critério de busca
-    cout << "Escolha o critério de busca:" << endl;
-    cout << "1 -> Identificador" << endl;
-    cout << "2 -> Nome da Galáxia" << endl;
-    cout << "3 -> Tipo da Galáxia" << endl;
-    cout << "4 -> Magnitude" << endl;
-    cout << "5 -> Constelação" << endl;
-    cout << "Opção: ";
+    cout << " Escolha o critério de busca:" << endl;
+    cout << " 1 -> Identificador" << endl;
+    cout << " 2 -> Nome da Galáxia" << endl;
+    cout << " 3 -> Tipo da Galáxia" << endl;
+    cout << " 4 -> Magnitude" << endl;
+    cout << " 5 -> Constelação" << endl;
+    cout << " Opção: ";
     cin >> opcaoBusca;
 
     bool encontrou = false;
@@ -282,7 +282,7 @@ void buscarGalaxia(Galaxia galaxias[], int tamanhoArquivo)
         case 1:
             int identBuscado;
 
-            cout << "Digite o identificador que deseja buscar: ";
+            cout << " Digite o identificador que deseja buscar: ";
             cin >> identBuscado;
 
             for (int i=0; i<tamanhoArquivo; i++)
@@ -290,41 +290,41 @@ void buscarGalaxia(Galaxia galaxias[], int tamanhoArquivo)
                 if (galaxias[i].identificador == identBuscado)
                 {
                     // Encontrou uma galáxia com a magnitude especificada
-                    cout << "Identificador: " << galaxias[i].identificador << endl;
-                    cout << "Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
-                    cout << "Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
-                    cout << "Magnitude: " << galaxias[i].magnitude << endl;
-                    cout << "Constelação: " << galaxias[i].constelacao << endl;
+                    cout << " Identificador: " << galaxias[i].identificador << endl;
+                    cout << " Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
+                    cout << " Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
+                    cout << " Magnitude: " << galaxias[i].magnitude << endl;
+                    cout << " Constelação: " << galaxias[i].constelacao << endl;
                     encontrou = true;
                 }
             }
 
             if (!encontrou)
             {
-                cout << "Nenhum registro encontrado com a magnitude especificada." << endl;
+                cout << endl <<" Nenhum registro encontrado com a magnitude especificada." << endl;
             }
             break;
         
         case 2:
-            cout << "Digite o nome da galáxia que deseja buscar: ";
+            cout << endl << " Digite o nome da galáxia que deseja buscar: ";
             getline(cin, termoBusca);
             for (int i=0; i<tamanhoArquivo; i++)
             {
                 if (galaxias[i].nome_galaxia == termoBusca)
                 {
                     // Encontrou uma galáxia com a magnitude especificada
-                    cout << "Identificador: " << galaxias[i].identificador << endl;
-                    cout << "Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
-                    cout << "Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
-                    cout << "Magnitude: " << galaxias[i].magnitude << endl;
-                    cout << "Constelação: " << galaxias[i].constelacao << endl;
+                    cout << " Identificador: " << galaxias[i].identificador << endl;
+                    cout << " Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
+                    cout << " Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
+                    cout << " Magnitude: " << galaxias[i].magnitude << endl;
+                    cout << " Constelação: " << galaxias[i].constelacao << endl;
                     encontrou = true;
                 }
             }
             break;
 
         case 3:
-            cout << "Digite o tipo da galáxia que deseja buscar: ";
+            cout << endl << " Digite o tipo da galáxia que deseja buscar: ";
             getline(cin, termoBusca);
             
             for (int i=0; i<tamanhoArquivo; i++)
@@ -332,11 +332,11 @@ void buscarGalaxia(Galaxia galaxias[], int tamanhoArquivo)
                 if (galaxias[i].tipo_galaxia == termoBusca)
                 {
                     // Encontrou uma galáxia com a magnitude especificada
-                    cout << "Identificador: " << galaxias[i].identificador << endl;
-                    cout << "Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
-                    cout << "Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
-                    cout << "Magnitude: " << galaxias[i].magnitude << endl;
-                    cout << "Constelação: " << galaxias[i].constelacao << endl;
+                    cout << " Identificador: " << galaxias[i].identificador << endl;
+                    cout << " Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
+                    cout << " Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
+                    cout << " Magnitude: " << galaxias[i].magnitude << endl;
+                    cout << " Constelação: " << galaxias[i].constelacao << endl;
                     encontrou = true;
                 }
             }
@@ -345,7 +345,7 @@ void buscarGalaxia(Galaxia galaxias[], int tamanhoArquivo)
         case 4:
             float magnitudeBuscada;
 
-            cout << "Digite a magnitude que deseja buscar: ";
+            cout << endl << " Digite a magnitude que deseja buscar: ";
             cin >> magnitudeBuscada;
 
             for (int i=0; i<tamanhoArquivo; i++)
@@ -353,65 +353,65 @@ void buscarGalaxia(Galaxia galaxias[], int tamanhoArquivo)
                 if (galaxias[i].magnitude == magnitudeBuscada)
                 {
                     // Encontrou uma galáxia com a magnitude especificada
-                    cout << "Identificador: " << galaxias[i].identificador << endl;
-                    cout << "Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
-                    cout << "Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
-                    cout << "Magnitude: " << galaxias[i].magnitude << endl;
-                    cout << "Constelação: " << galaxias[i].constelacao << endl;
+                    cout << " Identificador: " << galaxias[i].identificador << endl;
+                    cout << " Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
+                    cout << " Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
+                    cout << " Magnitude: " << galaxias[i].magnitude << endl;
+                    cout << " Constelação: " << galaxias[i].constelacao << endl;
                     encontrou = true;
                 }
             }
 
             if (!encontrou)
             {
-                cout << "Nenhum registro encontrado com a magnitude especificada." << endl;
+                cout << endl << " Nenhum registro encontrado com a magnitude especificada." << endl;
             }
             break;
 
         case 5:
-            cout << "Digite a constelação da galáxia que deseja buscar: ";
+            cout << endl << " Digite a constelação da galáxia que deseja buscar: ";
             getline(cin, termoBusca);
             for (int i=0; i<tamanhoArquivo; i++)
             {
                 if (galaxias[i].constelacao == termoBusca)
                 {
                     // Encontrou uma galáxia com a magnitude especificada
-                    cout << "Identificador: " << galaxias[i].identificador << endl;
-                    cout << "Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
-                    cout << "Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
-                    cout << "Magnitude: " << galaxias[i].magnitude << endl;
-                    cout << "Constelação: " << galaxias[i].constelacao << endl;
+                    cout << " Identificador: " << galaxias[i].identificador << endl;
+                    cout << " Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
+                    cout << " Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
+                    cout << " Magnitude: " << galaxias[i].magnitude << endl;
+                    cout << " Constelação: " << galaxias[i].constelacao << endl;
                     encontrou = true;
                 }
             }
             break;
 
         default:
-            cout << "Opção de busca inválida." << endl;
+            cout << endl << " Opção de busca inválida." << endl;
             break;
     }
 
     if (!encontrou)
     {
-        cout << "Nenhum registro encontrado para o critério de busca especificado." << endl;
+        cout << endl << " Nenhum registro encontrado para o critério de busca especificado." << endl;
     }
 }
 
 // Função que exibe a lista completa de galáxias
 void exibirListaCompleta(Galaxia galaxias[], int tamanhoArquivo) {
-    if (galaxias[0].nome_galaxia == "vazio") {
-        cout << "Nenhuma galáxia cadastrada." << endl;
+    if ((galaxias[0].nome_galaxia == "vazio")&&(galaxias[90].nome_galaxia == "vazio")&&(galaxias[45].nome_galaxia == "vazio"))) {
+        cout << endl << " Nenhuma galáxia cadastrada." << endl;
         return;
     }
 
     cout << "Lista completa de registros:" << endl;
     for (int i=0; i<tamanhoArquivo; i++) {
         if (galaxias[i].identificador != 99999){
-            cout << "Identificador: " << galaxias[i].identificador << endl;
-            cout << "Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
-            cout << "Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
-            cout << "Magnitude: " << galaxias[i].magnitude << endl;
-            cout << "Constelação: " << galaxias[i].constelacao << endl;
+            cout << " Identificador: " << galaxias[i].identificador << endl;
+            cout << " Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
+            cout << " Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
+            cout << " Magnitude: " << galaxias[i].magnitude << endl;
+            cout << " Constelação: " << galaxias[i].constelacao << endl;
             cout << endl;
         }
     }
@@ -421,23 +421,23 @@ void exibirListaCompleta(Galaxia galaxias[], int tamanhoArquivo) {
 void imprimirIntervalo(Galaxia galaxias[], int tamanhoArquivo) {
     
     int inicio, fim;
-    cout << "Digite o número do primeiro registro do intervalo: ";
+    cout << endl << " Digite o número do primeiro registro do intervalo: ";
     cin >> inicio;
-    cout << "Digite o número do último registro do intervalo: ";
+    cout << endl << " Digite o número do último registro do intervalo: ";
     cin >> fim;
     
     if (inicio < 1 || fim > tamanhoArquivo || inicio > fim) {
-        cout << "Intervalo inválido." << endl;
+        cout << endl <<" Intervalo inválido." << endl;
         return;
     }
 
     cout << "Registros no intervalo [" << inicio << " - " << fim << "]:" << endl;
     for (int i = inicio - 1; i < fim; i++) {  // Subtrai 1 de 'inicio' para ajustar ao índice base 0
-        cout << "Identificador: " << galaxias[i].identificador << endl;
-        cout << "Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
-        cout << "Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
-        cout << "Magnitude: " << galaxias[i].magnitude << endl;
-        cout << "Constelação: " << galaxias[i].constelacao << endl;
+        cout << " Identificador: " << galaxias[i].identificador << endl;
+        cout << " Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
+        cout << " Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
+        cout << " Magnitude: " << galaxias[i].magnitude << endl;
+        cout << " Constelação: " << galaxias[i].constelacao << endl;
         cout << endl;
     }
 }
@@ -467,7 +467,7 @@ int particionar(Galaxia galaxias[], int baixo, int alto, int criterio) {
                 trocar = (!marcadoParaRemoverJ && galaxias[j].magnitude <= pivo.magnitude);
                 break;
             default:
-                cerr << "Critério de seleção inválido." << endl;
+                cerr << " Critério de seleção inválido." << endl;
                 return 0;
         }
 
@@ -493,14 +493,14 @@ void quickSort(Galaxia galaxias[], int baixo, int alto, int criterio) {
 
 // Função que ordena os dados do vetor de galáxias utilizando o método QuickSort
 void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
-    cout << "Ordenador de dados" << endl;
-    cout << "É possível ordenar os dados do catálogo com base no valor de todas as colunas, para selecionar\n a coluna referência para ordenação selecione a opção de acordo com o menu abaixo:" << endl;
-    cout << "1 -> Por identificador" << endl;
-    cout << "2 -> nome_galaxia" << endl;
-    cout << "3 -> tipo_galaxia" << endl;
-    cout << "4 -> magnitude" << endl;
-    cout << "5 -> constelacao" << endl;
-    cout << endl << "Critério de seleção: ";
+    cout << " Ordenador de dados" << endl;
+    cout << " É possível ordenar os dados do catálogo com base no valor de todas as colunas, para selecionar\n a coluna referência para ordenação selecione a opção de acordo com o menu abaixo:" << endl;
+    cout << " 1 -> Por identificador" << endl;
+    cout << " 2 -> nome_galaxia" << endl;
+    cout << " 3 -> tipo_galaxia" << endl;
+    cout << " 4 -> magnitude" << endl;
+    cout << " 5 -> constelacao" << endl;
+    cout << endl << " Critério de seleção: ";
     int criterio = 0;
     cin >> criterio;
 
@@ -527,7 +527,7 @@ void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
             });
             break;
         default:
-            cerr << "Critério de seleção inválido." << endl;
+            cerr << " Critério de seleção inválido." << endl;
             return;
     }
 }
@@ -543,10 +543,10 @@ void carregar_dados_bin(Galaxia galaxias[], string nomeArquivo, int tamanhoArqui
         }
 
         arquivo.close();
-        cout << "Dados carregados com sucesso" << endl;
+        cout << endl << "  Mensagem do sistema: Dados atualizados na memória com sucesso provenientes do arquivo binário." << endl << endl;
         } 
     else {
-        cout << "Erro ao carregar o arquivo binário." << endl;
+        cout << "  Mensagem do sistema: Erro ao carregar o arquivo binário." << endl;
     }
 }
 
@@ -555,9 +555,9 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
 {
 
     // Bloco de indicação de quais as funções disponíveis para o usuário
-    cout << endl << "====================================================================" << endl;
-    cout << endl << "               Bem vindo ao Catálogo de Galáxias!                   " << endl;
-    cout << endl << "====================================================================" << endl << endl;
+    cout << endl << " ====================================================================" << endl;
+    cout << endl << "                Bem vindo ao Catálogo de Galáxias!                    " << endl;
+    cout << endl << " ====================================================================" << endl << endl;
     int escolha = 100;
     bool saved = false;
     string sairSemSalvar = "a";
@@ -579,73 +579,84 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
 
     while (escolha != 0)
     {   
-        cout << "Escolha uma das opções:" << endl;
-        cout << "1  -> Importar dados de arquivo .csv" << endl;
-        cout << "2  -> Exportar dados para arquivo .csv" << endl;
-        cout << "3  -> Ordenar dados de acordo com característica especificada" << endl;
-        cout << "4  -> Inserir registro" << endl;
-        cout << "5  -> Apagar registro" << endl;
-        cout << "6  -> Buscar registro" << endl;
-        cout << "7  -> Exibir lista completa de registros" << endl;
-        cout << "8  -> Exibir lista parcial de registros" << endl;
-        cout << "9 -> Salvar alterações" << endl;
-        cout << "0  -> Sair do programa" << endl;
-        cout << endl << "====================================================================" << endl;
-        cout << endl << "Opção: ";
-        cin >> escolha;
         cout << endl;
-        
-        carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+        cout << " ====================================================================" << endl;
+        cout << " Escolha uma das opções:" << endl;
+        cout << " 1  -> Importar dados de arquivo .csv" << endl;
+        cout << " 2  -> Exportar dados para arquivo .csv" << endl;
+        cout << " 3  -> Ordenar dados de acordo com característica especificada" << endl;
+        cout << " 4  -> Inserir registro" << endl;
+        cout << " 5  -> Apagar registro" << endl;
+        cout << " 6  -> Buscar registro" << endl;
+        cout << " 7  -> Exibir lista completa de registros" << endl;
+        cout << " 8  -> Exibir lista parcial de registros" << endl;
+        cout << " 9 -> Salvar alterações" << endl;
+        cout << " 10 -> Carregar dados do arquivo binário" << endl;
+        cout << " 0  -> Sair do programa" << endl;
+        cout << endl << "====================================================================" << endl;     
+
+        cout << " --> Opção: ";
+
+        cin >> escolha;
 
         switch (escolha)
         {
-        case 1: // Importar dados de arquivo .csv
-            lerCSV(galaxias, nomeArquivoCSVimport); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
-            break;
-        case 2: // Exportar dados para arquivo .csv
-            salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
-            break;
-        case 3: // Ordenar dados de acordo com característica especificada 
-            ordenarDados(galaxias, tamanhoArquivo);
-            salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
-            saved = false;
-            break;
-        case 4: // Inserir registro
-            inserirGalaxia(galaxias, tamanhoArquivo);
-            salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
-            saved = false;
-            break;
-        case 5: // Apagar registro
-            removerGalaxia(nome_arquivo_binario);
-            saved = false;
-            break;
-        case 6: // Buscar registro
-            buscarGalaxia(galaxias, tamanhoArquivo);
-            break;
-        case 7: // Exibir lista completa de registros
-            exibirListaCompleta(galaxias, tamanhoArquivo);
-            break;
-        case 8: // Exibir lista parcial de registros
-            imprimirIntervalo(galaxias, tamanhoArquivo);
-            break;
-        case 9: // Salvar alterações
-            saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
-            break;
-        case 0: // Sair do programa
-            if (saved != true) {
-                cout << "Deseja sair sem salvar os dados (Y/N) ?" << endl;
-                cin >> sairSemSalvar;
-                if ((sairSemSalvar == "Y") or (sairSemSalvar == "y")) {
-                    saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
-                    cout << endl << "Obrigado! :)" << endl;
-                } else {
-                     cout << endl << "Saindo sem salvar os dados!\nObrigado! :)" << endl;
+            case 1: // Importar dados de arquivo .csv
+                lerCSV(galaxias, nomeArquivoCSVimport); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
+                break;
+            case 2: // Exportar dados para arquivo .csv
+                salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
+                break;
+            case 3: // Ordenar dados de acordo com característica especificada
+                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                ordenarDados(galaxias, tamanhoArquivo);
+                salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                saved = false;
+                break;
+            case 4: // Inserir registro
+                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                inserirGalaxia(galaxias, tamanhoArquivo);
+                salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                saved = false;
+                break;
+            case 5: // Apagar registro
+                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                removerGalaxia(nome_arquivo_binario);
+                saved = false;
+                break;
+            case 6: // Buscar registro
+                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                buscarGalaxia(galaxias, tamanhoArquivo);
+                break;
+            case 7: // Exibir lista completa de registros
+                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                exibirListaCompleta(galaxias, tamanhoArquivo);
+                break;
+            case 8: // Exibir lista parcial de registros
+                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                imprimirIntervalo(galaxias, tamanhoArquivo);
+                break;
+            case 9: // Salvar alterações
+                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                break;
+            case 10: // Carregar dados do arquivo binário
+                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                break;
+            case 0: // Sair do programa
+                if (saved != true) {
+                    cout << "Deseja sair sem salvar os dados (Y/N) ?" << endl;
+                    cin >> sairSemSalvar;
+                    if ((sairSemSalvar == "Y") or (sairSemSalvar == "y")) {
+                        saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                        cout << endl << "Obrigado! :)" << endl;
+                    } else {
+                        cout << endl << "Saindo sem salvar os dados!\nObrigado! :)" << endl;
+                    }
                 }
-            }
-            break;
-        default:
-            cout << "Opção não disponível" << endl;
-            break;
+                break;
+            default:
+                cout << "Opção não disponível" << endl;
+                break;
         }
     }
 }
