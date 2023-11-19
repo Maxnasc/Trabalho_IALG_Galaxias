@@ -644,7 +644,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
                 break;
             case 0: // Sair do programa
                 if (saved != true) {
-                    cout << "Deseja sair sem salvar os dados (Y/N) ?" << endl;
+                    cout << "Deseja salvar os dados antes de sair (Y/N) ?" << endl;
                     cin >> sairSemSalvar;
                     if ((sairSemSalvar == "Y") or (sairSemSalvar == "y")) {
                         saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
