@@ -144,7 +144,7 @@ void salvarCSV(Galaxia galaxias[], string nomeArquivo, int tamanhoArquivo)
         }
 
         arquivo.close();
-        cout << endl << " Dados salvos com sucesso em " << nomeArquivo << endl;
+        cout << endl << " Dados salvos com sucesso! " << endl;
     }
     else
     {
@@ -163,7 +163,7 @@ bool salvar_dados_bin(Galaxia galaxias[], const string &nomeArquivoBinario, int 
         }
 
         arquivo.close();
-        cout << endl <<" Dados salvos com sucesso em " << nomeArquivoBinario << endl;
+        cout << endl <<" Dados salvos com sucesso!" << endl;
         return true; // Indica que os dados foram salvos com sucesso
     } else {
         cerr << endl <<" Erro ao criar o arquivo binário." << endl;
