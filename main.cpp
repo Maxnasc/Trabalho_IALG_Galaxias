@@ -579,6 +579,8 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
 
     while (escolha != 0)
     {   
+        lerCSV(galaxias, nomeArquivoCSVimport); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
+        salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo); // salva os dados no arquivo binário
         cout << endl;
         cout << " ====================================================================" << endl;
         cout << " Escolha uma das opções:" << endl;
@@ -610,18 +612,22 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
             case 3: // Ordenar dados de acordo com característica especificada
                 carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
                 ordenarDados(galaxias, tamanhoArquivo);
-                salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
                 saved = false;
                 break;
             case 4: // Inserir registro
                 carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
                 inserirGalaxia(galaxias, tamanhoArquivo);
-                salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
                 saved = false;
                 break;
             case 5: // Apagar registro
                 carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
                 removerGalaxia(nome_arquivo_binario);
+                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
                 saved = false;
                 break;
             case 6: // Buscar registro
@@ -638,9 +644,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
                 break;
             case 9: // Salvar alterações
                 saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
-                break;
-            case 10: // Carregar dados do arquivo binário
-                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
                 break;
             case 0: // Sair do programa
                 if (saved != true) {
@@ -648,6 +652,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
                     cin >> sairSemSalvar;
                     if ((sairSemSalvar == "Y") or (sairSemSalvar == "y")) {
                         saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                        salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
                         cout << endl << "Obrigado! :)" << endl;
                     } else {
                         cout << endl << "Saindo sem salvar os dados!\nObrigado! :)" << endl;
