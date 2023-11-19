@@ -1,4 +1,3 @@
-Identificador, Nome da Galáxia, Tipo da Galáxia, Magnitude, Constelação
 1,Antennae Galaxies,galaxy pair,11.2,Corvus
 2,Aquarius Dwarf,irregular dwarf,14,Aquarius
 3,Atoms-for-Peace,peculiar,12.7,Aquarius
@@ -90,7 +89,7 @@ Identificador, Nome da Galáxia, Tipo da Galáxia, Magnitude, Constelação
 89,Wild's Triplet,spiral,6.4,Virgo
 90,Wolf-Lundmark-Melotte,barred irregular,11,Cetus
 91,teste,teste,0,teste
-99999,vazio,vazio,0,vazio
+92,t,t,3,rew
 99999,vazio,vazio,0,vazio
 99999,vazio,vazio,0,vazio
 99999,vazio,vazio,0,vazio
