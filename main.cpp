@@ -558,6 +558,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
     cout << endl << " ====================================================================" << endl;
     cout << endl << "                Bem vindo ao Catálogo de Galáxias!                    " << endl;
     cout << endl << " ====================================================================" << endl << endl;
+    
     int escolha = 100;
     bool saved = false;
     string sairSemSalvar = "a";
@@ -573,14 +574,13 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
         galaxias[i] = empty_galaxy;
     }
 
-
+    lerCSV(galaxias, nomeArquivoCSVimport); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
+    salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo); // salva os dados no arquivo binário
 
     //Dados dos arquivos binários
 
     while (escolha != 0)
     {   
-        lerCSV(galaxias, nomeArquivoCSVimport); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
-        salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo); // salva os dados no arquivo binário
         cout << endl;
         cout << " ====================================================================" << endl;
         cout << " Escolha uma das opções:" << endl;
@@ -593,7 +593,6 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
         cout << " 7  -> Exibir lista completa de registros" << endl;
         cout << " 8  -> Exibir lista parcial de registros" << endl;
         cout << " 9 -> Salvar alterações" << endl;
-        cout << " 10 -> Carregar dados do arquivo binário" << endl;
         cout << " 0  -> Sair do programa" << endl;
         cout << endl << "====================================================================" << endl;     
 
