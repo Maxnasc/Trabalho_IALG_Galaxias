@@ -576,6 +576,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
 
     lerCSV(galaxias, nomeArquivoCSVimport); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
     salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo); // salva os dados no arquivo binário
+    carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
 
     //Dados dos arquivos binários
 
@@ -609,36 +610,24 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
                 salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
                 break;
             case 3: // Ordenar dados de acordo com característica especificada
-                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
                 ordenarDados(galaxias, tamanhoArquivo);
                 saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
-                salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
-                saved = false;
                 break;
             case 4: // Inserir registro
-                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
                 inserirGalaxia(galaxias, tamanhoArquivo);
                 saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
-                salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
-                saved = false;
                 break;
             case 5: // Apagar registro
-                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
                 removerGalaxia(nome_arquivo_binario);
                 saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
-                salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
-                saved = false;
                 break;
             case 6: // Buscar registro
-                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
                 buscarGalaxia(galaxias, tamanhoArquivo);
                 break;
             case 7: // Exibir lista completa de registros
-                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
                 exibirListaCompleta(galaxias, tamanhoArquivo);
                 break;
             case 8: // Exibir lista parcial de registros
-                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
                 imprimirIntervalo(galaxias, tamanhoArquivo);
                 break;
             case 9: // Salvar alterações
@@ -646,17 +635,8 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
                 salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
                 break;
             case 0: // Sair do programa
-                if (saved != true) {
-                    cout << "Deseja salvar os dados antes de sair (Y/N) ?" << endl;
-                    cin >> sairSemSalvar;
-                    if ((sairSemSalvar == "Y") or (sairSemSalvar == "y")) {
-                        saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
-                        salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
-                        cout << endl << "Obrigado! :)" << endl;
-                    } else {
-                        cout << endl << "Saindo sem salvar os dados!\nObrigado! :)" << endl;
-                    }
-                }
+                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
                 break;
             default:
                 cout << "Opção não disponível" << endl;
@@ -670,9 +650,9 @@ int main()
 {
     // Declaração de nomes de arquivos de import e export de .csv
     // Necessário alterar o diretório para o local onde os arquivos estão salvos
-    string nomeArquivoCSVimport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_import.csv";
-    string nomeArquivoCSVexport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_export.csv";
-    string nome_arquivo_binario = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/dados_binarios.dat";
+    string nomeArquivoCSVimport = "galaxys_import.csv";
+    string nomeArquivoCSVexport = "galaxys_export.csv";
+    string nome_arquivo_binario = "dados_binarios.dat";
     int tamanhoArquivo = 150;
     
     menu(tamanhoArquivo, nomeArquivoCSVimport, nomeArquivoCSVexport, nome_arquivo_binario);
