@@ -94,8 +94,6 @@ Galaxia* redimensionar_vetor(Galaxia* vetor, int tamanhoAtual) {
         novoVetor[i].registra_vazio();
     }
 
-    delete[] vetor;
-
     return novoVetor;
 }
 
@@ -563,16 +561,19 @@ void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
 }
 
 // Função que carrega os dados do arquivo binário para o vetor de galáxias
-void carregar_dados_bin(Galaxia*& galaxias, string nomeArquivo, int& tamanhoArquivo) {
+void carregar_dados_bin(Galaxia*& galaxias, string nomeArquivo, int& tamanhoArquivo, int& tamanhoDoVetor) {
     ifstream arquivo(nomeArquivo, std::ios::binary);
-    int tamanhoDoVetor = sizeof(galaxias) / sizeof(galaxias[0]);
 
     if (arquivo.is_open()) {
         for (int i=0; i<tamanhoArquivo; i++) {
             // Redimensionamento
+            cout << "Índice atual: " << i << endl;
             if (i == tamanhoDoVetor) {
+                cout << "Entrou no if"<< endl;
                 Galaxia* novoVetor = redimensionar_vetor(galaxias, tamanhoDoVetor);
+                cout << "Criou o vetor novo"<< endl;
                 delete[] galaxias;
+                cout << "deletou o antigo"<< endl;
                 galaxias = novoVetor;
             }
             // Escreve cada objeto Galaxia no arquivo binário
@@ -600,17 +601,19 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
     bool saved = false;
     string sairSemSalvar = "a";
 
+    int tamanhoDoVetor = 100;
+
     // Alocação dinâmica do vetor
     Galaxia *galaxias = new Galaxia[tamanhoArquivo];
 
     // inicializa galáxia vazia
-    for (int i=0; i<tamanhoArquivo; i++) {
+    for (int i=0; i<tamanhoDoVetor; i++) {
         galaxias[i].registra_vazio();
     }
 
     lerCSV(galaxias, nomeArquivoCSVexport); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
     salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo); // salva os dados no arquivo binário
-    carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+    carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo, tamanhoDoVetor);
 
     //Dados dos arquivos binários
 
@@ -644,7 +647,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
                 salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
                 break;
             case 3: // Ordenar dados de acordo com característica especificada
-                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo, tamanhoDoVetor);
                 ordenarDados(galaxias, tamanhoArquivo);
                 saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
                 break;
