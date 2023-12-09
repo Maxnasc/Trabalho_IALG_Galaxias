@@ -45,6 +45,13 @@ struct Galaxia
     string tipo_galaxia = "";
     float magnitude = 0.0;
     string constelacao = "";
+    void registra_vazio() {
+        this->identificador = 99999;
+        this->nome_galaxia = "vazio";
+        this->tipo_galaxia = "vazio";
+        this->magnitude = 0.0;
+        this->constelacao = "vazio";
+    }
 };
 
 // Função que verifica o tamanho do arquivo CSV
@@ -73,6 +80,25 @@ int verificarTamanhoArquivoCSV(const string &nomeArquivo)
     }
 }
 
+Galaxia* redimensionar_vetor(Galaxia* vetor, int tamanhoAtual) {
+    // Por definição a cada vez que a função for chamada serão acrescentadas 10 posições
+    int novoTamanho = tamanhoAtual + 10;
+
+    Galaxia* novoVetor = new Galaxia[novoTamanho];
+
+    for (int i=0; i<tamanhoAtual; i++) {
+        novoVetor[i] = vetor[i];
+    }
+
+    for (int i=tamanhoAtual; i<novoTamanho; i++) {
+        novoVetor[i].registra_vazio();
+    }
+
+    delete[] vetor;
+
+    return novoVetor;
+}
+
 // Função que lê o arquivo CSV e armazena os dados em um vetor de galáxias
 void lerCSV(Galaxia galaxias[], const string &nomeArquivo)
 {
@@ -85,6 +111,7 @@ void lerCSV(Galaxia galaxias[], const string &nomeArquivo)
 
         while (getline(arquivo, linha))
         {
+            // Verificação de tamanho
             Galaxia galaxia;
             istringstream linhaStream(linha);
             string campo;
@@ -536,11 +563,18 @@ void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
 }
 
 // Função que carrega os dados do arquivo binário para o vetor de galáxias
-void carregar_dados_bin(Galaxia galaxias[], string nomeArquivo, int tamanhoArquivo) {
+void carregar_dados_bin(Galaxia*& galaxias, string nomeArquivo, int& tamanhoArquivo) {
     ifstream arquivo(nomeArquivo, std::ios::binary);
+    int tamanhoDoVetor = sizeof(galaxias) / sizeof(galaxias[0]);
 
     if (arquivo.is_open()) {
         for (int i=0; i<tamanhoArquivo; i++) {
+            // Redimensionamento
+            if (i == tamanhoDoVetor) {
+                Galaxia* novoVetor = redimensionar_vetor(galaxias, tamanhoDoVetor);
+                delete[] galaxias;
+                galaxias = novoVetor;
+            }
             // Escreve cada objeto Galaxia no arquivo binário
             arquivo.read(reinterpret_cast<char*>(&galaxias[i]), sizeof(Galaxia));
         }
@@ -565,16 +599,13 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
     int escolha = 100;
     bool saved = false;
     string sairSemSalvar = "a";
-    Galaxia empty_galaxy;
-    empty_galaxy.constelacao = "vazio";
-    empty_galaxy.identificador = 99999;
-    empty_galaxy.magnitude = 0;
-    empty_galaxy.nome_galaxia = "vazio";
-    empty_galaxy.tipo_galaxia = "vazio";
-    Galaxia galaxias[150];
+
+    // Alocação dinâmica do vetor
+    Galaxia *galaxias = new Galaxia[tamanhoArquivo];
+
     // inicializa galáxia vazia
     for (int i=0; i<tamanhoArquivo; i++) {
-        galaxias[i] = empty_galaxy;
+        galaxias[i].registra_vazio();
     }
 
     lerCSV(galaxias, nomeArquivoCSVexport); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
