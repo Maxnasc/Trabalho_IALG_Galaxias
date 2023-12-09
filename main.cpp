@@ -80,7 +80,7 @@ int verificarTamanhoArquivoCSV(const string &nomeArquivo)
     }
 }
 
-Galaxia* redimensionar_vetor(Galaxia* vetor, int tamanhoAtual) {
+Galaxia* redimensionar_vetor(Galaxia* vetor, int tamanhoAtual, int& tamanhoDoVetor) {
     // Por definição a cada vez que a função for chamada serão acrescentadas 10 posições
     int novoTamanho = tamanhoAtual + 10;
 
@@ -98,7 +98,7 @@ Galaxia* redimensionar_vetor(Galaxia* vetor, int tamanhoAtual) {
 }
 
 // Função que lê o arquivo CSV e armazena os dados em um vetor de galáxias
-void lerCSV(Galaxia*& galaxias, const string &nomeArquivo)
+void lerCSV(Galaxia*& galaxias, const string &nomeArquivo, int& tamanhoDoVetor)
 {
     ifstream arquivo(nomeArquivo);
     int index = 0;
@@ -109,6 +109,13 @@ void lerCSV(Galaxia*& galaxias, const string &nomeArquivo)
 
         while (getline(arquivo, linha))
         {
+            // Redimensionamento
+            if (index == tamanhoDoVetor) {
+                Galaxia* novoVetor = redimensionar_vetor(galaxias, tamanhoDoVetor);
+                delete[] galaxias;
+                galaxias = novoVetor;
+            }
+
             // Verificação de tamanho
             Galaxia galaxia;
             istringstream linhaStream(linha);
@@ -176,7 +183,7 @@ void salvarCSV(Galaxia*& galaxias, string nomeArquivo, int tamanhoArquivo)
 }
 
 // Função que salva os dados do vetor de galáxias em um arquivo binário
-bool salvar_dados_bin(Galaxia galaxias[], const string &nomeArquivoBinario, int tamanhoArquivo) {
+bool salvar_dados_bin(Galaxia*& galaxias, const string &nomeArquivoBinario, int tamanhoArquivo) {
     ofstream arquivo(nomeArquivoBinario, ios::out | ios::binary);
 
     if (arquivo.is_open()) {
@@ -637,7 +644,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
         switch (escolha)
         {
             case 1: // Importar dados de arquivo .csv
-                lerCSV(galaxias, nomeArquivoCSVimport); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
+                lerCSV(galaxias, nomeArquivoCSVimport, tamanhoDoVetor); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
                 break;
             case 2: // Exportar dados para arquivo .csv
                 salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
