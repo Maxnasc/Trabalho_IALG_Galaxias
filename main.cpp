@@ -98,7 +98,7 @@ Galaxia* redimensionar_vetor(Galaxia* vetor, int tamanhoAtual) {
 }
 
 // Função que lê o arquivo CSV e armazena os dados em um vetor de galáxias
-void lerCSV(Galaxia galaxias[], const string &nomeArquivo)
+void lerCSV(Galaxia*& galaxias, const string &nomeArquivo)
 {
     ifstream arquivo(nomeArquivo);
     int index = 0;
@@ -567,13 +567,9 @@ void carregar_dados_bin(Galaxia*& galaxias, string nomeArquivo, int& tamanhoArqu
     if (arquivo.is_open()) {
         for (int i=0; i<tamanhoArquivo; i++) {
             // Redimensionamento
-            cout << "Índice atual: " << i << endl;
             if (i == tamanhoDoVetor) {
-                cout << "Entrou no if"<< endl;
                 Galaxia* novoVetor = redimensionar_vetor(galaxias, tamanhoDoVetor);
-                cout << "Criou o vetor novo"<< endl;
                 delete[] galaxias;
-                cout << "deletou o antigo"<< endl;
                 galaxias = novoVetor;
             }
             // Escreve cada objeto Galaxia no arquivo binário
