@@ -150,7 +150,7 @@ void lerCSV(Galaxia*& galaxias, const string &nomeArquivo)
 }
 
 // Função que salva os dados do vetor de galáxias em um arquivo CSV
-void salvarCSV(Galaxia galaxias[], string nomeArquivo, int tamanhoArquivo)
+void salvarCSV(Galaxia*& galaxias, string nomeArquivo, int tamanhoArquivo)
 {
     ofstream arquivo(nomeArquivo);
 
