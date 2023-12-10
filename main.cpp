@@ -96,14 +96,7 @@ Galaxia* redimensionar_vetor(Galaxia* vetor, int& tamanhoDoVetor) {
 
     tamanhoDoVetor = novoTamanho;
 
-    tamanhoDoVetor = novoTamanho;
-
-    tamanhoDoVetor = novoTamanho;
-
-    delete[] vetor;
-
-    vetor = novoVetor;
-
+    return novoVetor;
 }
 
 // Função que lê o arquivo CSV e armazena os dados em um vetor de galáxias
@@ -209,7 +202,7 @@ bool salvar_dados_bin(Galaxia*& galaxias, const string &nomeArquivoBinario, int 
 }
 
 // Função que insere uma nova galáxia no vetor de galáxias
-void inserirGalaxia(Galaxia galaxias[], int tamanhoArquivo)
+void inserirGalaxia(Galaxia*& galaxias, int tamanhoArquivo)
 {
     Galaxia novaGalaxia;
 
@@ -291,7 +284,7 @@ void removerGalaxia(const string &nomeArquivoBinario)
 }
 
 // Função que busca uma galáxia no vetor de galáxias
-void buscarGalaxia(Galaxia galaxias[], int tamanhoArquivo)
+void buscarGalaxia(Galaxia*& galaxias, int tamanhoArquivo)
 {
     int opcaoBusca;
 
@@ -433,7 +426,7 @@ void buscarGalaxia(Galaxia galaxias[], int tamanhoArquivo)
 }
 
 // Função que exibe a lista completa de galáxias
-void exibirListaCompleta(Galaxia galaxias[], int tamanhoArquivo) {
+void exibirListaCompleta(Galaxia*& galaxias, int tamanhoArquivo) {
     if ((galaxias[0].nome_galaxia == "vazio")&&(galaxias[90].nome_galaxia == "vazio")&&(galaxias[45].nome_galaxia == "vazio")) {
         cout << endl << " Nenhuma galáxia cadastrada." << endl;
         return;
@@ -453,7 +446,7 @@ void exibirListaCompleta(Galaxia galaxias[], int tamanhoArquivo) {
 }
 
 // Função que exibe uma lista parcial de galáxias
-void imprimirIntervalo(Galaxia galaxias[], int tamanhoArquivo) {
+void imprimirIntervalo(Galaxia*& galaxias, int tamanhoArquivo) {
     
     int inicio, fim;
     cout << endl << " Digite o número do primeiro registro do intervalo: ";
@@ -484,7 +477,7 @@ bool marcadoParaRemover(const Galaxia& galaxia)
 }
 
 // Função auxiliar para particionar o vetor para o QuickSort
-int particionar(Galaxia galaxias[], int baixo, int alto, int criterio) {
+int particionar(Galaxia*& galaxias, int baixo, int alto, int criterio) {
     Galaxia pivo = galaxias[alto];
     int i = baixo - 1;
 
@@ -524,7 +517,7 @@ int particionar(Galaxia galaxias[], int baixo, int alto, int criterio) {
 }
 
 // Função principal do QuickSort
-void quickSort(Galaxia galaxias[], int baixo, int alto, int criterio) {
+void quickSort(Galaxia*& galaxias, int baixo, int alto, int criterio) {
     if (baixo < alto) {
         int pi = particionar(galaxias, baixo, alto, criterio);
 
@@ -534,7 +527,7 @@ void quickSort(Galaxia galaxias[], int baixo, int alto, int criterio) {
 }
 
 // Função que ordena os dados do vetor de galáxias utilizando o método QuickSort
-void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
+void ordenarDados(Galaxia*& galaxias, int tamanhoArquivo) {
     cout << " Ordenador de dados" << endl;
     cout << " É possível ordenar os dados do catálogo com base no valor de todas as colunas, para selecionar\n a coluna referência para ordenação selecione a opção de acordo com o menu abaixo:" << endl;
     cout << " 1 -> Por identificador" << endl;
@@ -615,7 +608,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
 
     lerCSV(galaxias, nomeArquivoCSVimport, tamanhoDoVetor); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
     salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo); // salva os dados no arquivo binário
-    //carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo, tamanhoDoVetor);
+    carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo, tamanhoDoVetor);
 
     //Dados dos arquivos binários
 
@@ -690,9 +683,9 @@ int main()
 {
     // Declaração de nomes de arquivos de import e export de .csv
     // Necessário alterar o diretório para o local onde os arquivos estão salvos
-    string nomeArquivoCSVimport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_import.csv";
-    string nomeArquivoCSVexport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_export.csv";
-    string nome_arquivo_binario = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/dados_binarios.dat";
+    string nomeArquivoCSVimport = "galaxys_import.csv";
+    string nomeArquivoCSVexport = "galaxys_export.csv";
+    string nome_arquivo_binario = "dados_binarios.dat";
     int tamanhoArquivo = 150;
     
     menu(tamanhoArquivo, nomeArquivoCSVimport, nomeArquivoCSVexport, nome_arquivo_binario);
