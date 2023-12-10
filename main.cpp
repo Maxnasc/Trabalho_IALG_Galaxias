@@ -435,13 +435,16 @@ void exibirListaCompleta(Galaxia*& galaxias, int tamanhoArquivo) {
 
     cout << "Lista completa de registros:" << endl;
     for (int i=0; i<tamanhoArquivo; i++) {
-        if (galaxias[i].identificador != 99999){
-            cout << " Identificador: " << galaxias[i].identificador << endl;
-            cout << " Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
-            cout << " Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
-            cout << " Magnitude: " << galaxias[i].magnitude << endl;
-            cout << " Constelação: " << galaxias[i].constelacao << endl;
-            cout << endl;
+        if ((galaxias[i].identificador != 99999) && (galaxias[i].identificador != 0)){
+            if (galaxias[i].identificador != 0) {
+                cout << " Identificador: " << galaxias[i].identificador << endl;
+                cout << " Nome da Galáxia: " << galaxias[i].nome_galaxia << endl;
+                cout << " Tipo da Galáxia: " << galaxias[i].tipo_galaxia << endl;
+                cout << " Magnitude: " << galaxias[i].magnitude << endl;
+                cout << " Constelação: " << galaxias[i].constelacao << endl;
+                cout << endl;
+            }
+            
         }
     }
 }
