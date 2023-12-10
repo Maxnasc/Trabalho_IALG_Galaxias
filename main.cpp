@@ -80,19 +80,21 @@ int verificarTamanhoArquivoCSV(const string &nomeArquivo)
     }
 }
 
-Galaxia* redimensionar_vetor(Galaxia* vetor, int tamanhoAtual, int& tamanhoDoVetor) {
+Galaxia* redimensionar_vetor(Galaxia* vetor, int& tamanhoDoVetor) {
     // Por definição a cada vez que a função for chamada serão acrescentadas 10 posições
-    int novoTamanho = tamanhoAtual + 10;
+    int novoTamanho = tamanhoDoVetor + 10;
 
     Galaxia* novoVetor = new Galaxia[novoTamanho];
 
-    for (int i=0; i<tamanhoAtual; i++) {
+    for (int i=0; i<tamanhoDoVetor; i++) {
         novoVetor[i] = vetor[i];
     }
 
-    for (int i=tamanhoAtual; i<novoTamanho; i++) {
+    for (int i=tamanhoDoVetor; i<novoTamanho; i++) {
         novoVetor[i].registra_vazio();
     }
+
+    tamanhoDoVetor = novoTamanho;
 
     return novoVetor;
 }
@@ -614,7 +616,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
         galaxias[i].registra_vazio();
     }
 
-    lerCSV(galaxias, nomeArquivoCSVexport); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
+    lerCSV(galaxias, nomeArquivoCSVexport, tamanhoDoVetor); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
     salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo); // salva os dados no arquivo binário
     carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo, tamanhoDoVetor);
 
