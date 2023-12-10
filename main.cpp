@@ -544,22 +544,16 @@ void ordenarDados(Galaxia galaxias[], int tamanhoArquivo) {
             quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
             break;
         case 2:
-            sort(galaxias, galaxias + tamanhoArquivo, [](const Galaxia& a, const Galaxia& b) {
-                return a.nome_galaxia < b.nome_galaxia;
-            });
+            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
             break;
         case 3:
-            sort(galaxias, galaxias + tamanhoArquivo, [](const Galaxia& a, const Galaxia& b) {
-                return a.tipo_galaxia < b.tipo_galaxia;
-            });
+            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
             break;
         case 4:
             quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
             break;
         case 5:
-            sort(galaxias, galaxias + tamanhoArquivo, [](const Galaxia& a, const Galaxia& b) {
-                return a.constelacao < b.constelacao;
-            });
+            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
             break;
         default:
             cerr << " Critério de seleção inválido." << endl;
