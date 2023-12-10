@@ -80,7 +80,7 @@ int verificarTamanhoArquivoCSV(const string &nomeArquivo)
     }
 }
 
-Galaxia* redimensionar_vetor(Galaxia* vetor, int tamanhoAtual) {
+void redimensionar_vetor(Galaxia* vetor, int tamanhoAtual) {
     // Por definição a cada vez que a função for chamada serão acrescentadas 10 posições
     int novoTamanho = tamanhoAtual + 10;
 
@@ -96,7 +96,6 @@ Galaxia* redimensionar_vetor(Galaxia* vetor, int tamanhoAtual) {
 
     vetor = novoVetor;
 
-    return vetor;
 }
 
 // Função que lê o arquivo CSV e armazena os dados em um vetor de galáxias
@@ -113,9 +112,7 @@ void lerCSV(Galaxia*& galaxias, const string &nomeArquivo, int& tamanhoDoVetor)
         {
             // Redimensionamento
             if (index == tamanhoDoVetor) {
-                Galaxia* novoVetor = redimensionar_vetor(galaxias, tamanhoDoVetor);
-                delete[] galaxias;
-                galaxias = novoVetor;
+                redimensionar_vetor(galaxias, tamanhoDoVetor);
             }
 
             // Verificação de tamanho
@@ -571,9 +568,7 @@ void carregar_dados_bin(Galaxia*& galaxias, string nomeArquivo, int& tamanhoArqu
         for (int i=0; i<tamanhoArquivo; i++) {
             // Redimensionamento
             if (i == tamanhoDoVetor) {
-                Galaxia* novoVetor = redimensionar_vetor(galaxias, tamanhoDoVetor);
-                delete[] galaxias;
-                galaxias = novoVetor;
+                redimensionar_vetor(galaxias, tamanhoDoVetor);
             }
             // Escreve cada objeto Galaxia no arquivo binário
             arquivo.read(reinterpret_cast<char*>(&galaxias[i]), sizeof(Galaxia));
@@ -612,7 +607,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
 
     lerCSV(galaxias, nomeArquivoCSVimport, tamanhoDoVetor); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
     salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo); // salva os dados no arquivo binário
-    carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo, tamanhoDoVetor);
+    //carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo, tamanhoDoVetor);
 
     //Dados dos arquivos binários
 
@@ -687,9 +682,9 @@ int main()
 {
     // Declaração de nomes de arquivos de import e export de .csv
     // Necessário alterar o diretório para o local onde os arquivos estão salvos
-    string nomeArquivoCSVimport = "galaxys_import.csv";
-    string nomeArquivoCSVexport = "galaxys_export.csv";
-    string nome_arquivo_binario = "dados_binarios.dat";
+    string nomeArquivoCSVimport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_import.csv";
+    string nomeArquivoCSVexport = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/galaxys_export.csv";
+    string nome_arquivo_binario = "C:/Users/clebe/OneDrive/Documentos/UFLA_Periodo_10/IALG/Trabalho_IALG_Galaxias/dados_binarios.dat";
     int tamanhoArquivo = 150;
     
     menu(tamanhoArquivo, nomeArquivoCSVimport, nomeArquivoCSVexport, nome_arquivo_binario);
