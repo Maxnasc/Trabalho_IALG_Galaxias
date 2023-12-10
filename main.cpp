@@ -80,7 +80,8 @@ int verificarTamanhoArquivoCSV(const string &nomeArquivo)
     }
 }
 
-Galaxia* redimensionar_vetor(Galaxia* vetor, int& tamanhoDoVetor) {
+// Função para redimensionar o vetor dinamicamente alocado
+Galaxia* redimensionar_vetor(Galaxia*& vetor, int& tamanhoDoVetor) {
     // Por definição a cada vez que a função for chamada serão acrescentadas 10 posições
     int novoTamanho = tamanhoDoVetor + 10;
 
@@ -157,14 +158,14 @@ void lerCSV(Galaxia*& galaxias, const string &nomeArquivo, int& tamanhoDoVetor)
 }
 
 // Função que salva os dados do vetor de galáxias em um arquivo CSV
-void salvarCSV(Galaxia*& galaxias, string nomeArquivo, int tamanhoArquivo)
+void salvarCSV(Galaxia*& galaxias, string nomeArquivo, int tamanhoDoVetor)
 {
     ofstream arquivo(nomeArquivo);
 
     if (arquivo.is_open())
     {
 
-        for (int i=0; i<tamanhoArquivo; i++)
+        for (int i=0; i<tamanhoDoVetor; i++)
         {
             arquivo << galaxias[i].identificador << ","
                     << galaxias[i].nome_galaxia << ","
@@ -183,11 +184,11 @@ void salvarCSV(Galaxia*& galaxias, string nomeArquivo, int tamanhoArquivo)
 }
 
 // Função que salva os dados do vetor de galáxias em um arquivo binário
-bool salvar_dados_bin(Galaxia*& galaxias, const string &nomeArquivoBinario, int tamanhoArquivo) {
+bool salvar_dados_bin(Galaxia*& galaxias, const string &nomeArquivoBinario, int tamanhoDoVetor) {
     ofstream arquivo(nomeArquivoBinario, ios::out | ios::binary);
 
     if (arquivo.is_open()) {
-        for (int i=0; i<tamanhoArquivo; i++) {
+        for (int i=0; i<tamanhoDoVetor; i++) {
             // Escreve os dados da galáxia no arquivo binário
             arquivo.write(reinterpret_cast<const char*>(&galaxias[i]), sizeof(Galaxia));
         }
@@ -202,7 +203,7 @@ bool salvar_dados_bin(Galaxia*& galaxias, const string &nomeArquivoBinario, int 
 }
 
 // Função que insere uma nova galáxia no vetor de galáxias
-void inserirGalaxia(Galaxia*& galaxias, int tamanhoArquivo)
+void inserirGalaxia(Galaxia*& galaxias, int tamanhoDoVetor)
 {
     Galaxia novaGalaxia;
 
@@ -232,7 +233,7 @@ void inserirGalaxia(Galaxia*& galaxias, int tamanhoArquivo)
     getline(cin, novaGalaxia.constelacao);
 
     // Busca por espaços vazios ou registros marcados para remoção
-    for (int i = 0; i < tamanhoArquivo; i++) {
+    for (int i = 0; i < tamanhoDoVetor; i++) {
         if (galaxias[i].nome_galaxia == "vazio" || galaxias[i].identificador == -1) {
             galaxias[i] = novaGalaxia;
             cout << endl << " Nova galáxia adicionada com sucesso!" << endl;
@@ -498,8 +499,17 @@ int particionar(Galaxia*& galaxias, int baixo, int alto, int criterio) {
             case 1:
                 trocar = (galaxias[j].identificador <= pivo.identificador);
                 break;
+            case 2:
+                trocar = (galaxias[j].nome_galaxia <= pivo.nome_galaxia);
+                break;
+            case 3:
+                trocar = (galaxias[j].tipo_galaxia <= pivo.tipo_galaxia);
+                break;
             case 4:
                 trocar = (galaxias[j].magnitude <= pivo.magnitude);
+                break;
+            case 5:
+                trocar = (galaxias[j].constelacao <= pivo.constelacao);
                 break;
             default:
                 cerr << " Critério de seleção inválido." << endl;
@@ -536,27 +546,27 @@ void ordenarDados(Galaxia*& galaxias, int tamanhoArquivo) {
     cout << " 4 -> magnitude" << endl;
     cout << " 5 -> constelacao" << endl;
     cout << endl << " Critério de seleção: ";
-    int criterio = 0;
-    cin >> criterio;
+    int criterio_ordenar = 0;
+    cin >> criterio_ordenar;
 
-    switch (criterio) {
+    switch (criterio_ordenar) {
         case 1:
-            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
+            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio_ordenar);
             break;
         case 2:
-            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
+            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio_ordenar);
             break;
         case 3:
-            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
+            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio_ordenar);
             break;
         case 4:
-            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
+            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio_ordenar);
             break;
         case 5:
-            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio);
+            quickSort(galaxias, 0, tamanhoArquivo - 1, criterio_ordenar);
             break;
         default:
-            cerr << " Critério de seleção inválido." << endl;
+            cout << " Critério de seleção inválido." << endl;
             return;
     }
 }
@@ -606,7 +616,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
         galaxias[i].registra_vazio();
     }
 
-    lerCSV(galaxias, nomeArquivoCSVimport, tamanhoDoVetor); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
+    lerCSV(galaxias, nomeArquivoCSVexport, tamanhoDoVetor); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
     salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo); // salva os dados no arquivo binário
     carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo, tamanhoDoVetor);
 
@@ -639,20 +649,20 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
                 lerCSV(galaxias, nomeArquivoCSVimport, tamanhoDoVetor); // retorna os dados para o vetor de galáxias > verificar se nenhum dado é perdido
                 break;
             case 2: // Exportar dados para arquivo .csv
-                salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
+                salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoDoVetor);
                 break;
             case 3: // Ordenar dados de acordo com característica especificada
                 carregar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo, tamanhoDoVetor);
-                ordenarDados(galaxias, tamanhoArquivo);
-                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                ordenarDados(galaxias, tamanhoDoVetor);
+                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoDoVetor);
                 break;
             case 4: // Inserir registro
                 inserirGalaxia(galaxias, tamanhoArquivo);
-                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoDoVetor);
                 break;
             case 5: // Apagar registro
                 removerGalaxia(nome_arquivo_binario);
-                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoDoVetor);
                 break;
             case 6: // Buscar registro
                 buscarGalaxia(galaxias, tamanhoArquivo);
@@ -664,11 +674,11 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
                 imprimirIntervalo(galaxias, tamanhoArquivo);
                 break;
             case 9: // Salvar alterações
-                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoDoVetor);
                 salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
                 break;
             case 0: // Sair do programa
-                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoArquivo);
+                saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoDoVetor);
                 salvarCSV(galaxias, nomeArquivoCSVexport, tamanhoArquivo);
                 break;
             default:
