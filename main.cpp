@@ -244,8 +244,8 @@ void inserirGalaxia(Galaxia*& galaxias, int tamanhoDoVetor)
     
 }
 
-// Função que remove uma galáxia do arquivo binário
-void removerGalaxia(const string &nomeArquivoBinario)
+// Função que remove uma galáxia do vetor de galáxias
+void removerGalaxia(Galaxia*& galaxias, int tamanhoArquivo)
 {
     int identificadorParaRemover;
 
@@ -253,35 +253,18 @@ void removerGalaxia(const string &nomeArquivoBinario)
     cout << endl <<" Digite o identificador da galáxia que deseja remover: ";
     cin >> identificadorParaRemover;
 
-    // Abre o arquivo binário em modo de leitura e escrita
-    fstream arquivoBinario(nomeArquivoBinario, ios::binary | ios::in | ios::out);
-
-    if (arquivoBinario.is_open()) {
-        // Procura a galáxia no arquivo pelo identificador
-        Galaxia galaxia;
-        while (arquivoBinario.read(reinterpret_cast<char*>(&galaxia), sizeof(Galaxia)))
-        {
-            if (galaxia.identificador == identificadorParaRemover)
-            {
-                // Marca a galáxia como removida no arquivo
-                galaxia.identificador = -1;  // Usando -1 como marcação de remoção lógica
-                arquivoBinario.seekp(-static_cast<int>(sizeof(Galaxia)), ios::cur);  // Volta para a posição antes da leitura
-                arquivoBinario.write(reinterpret_cast<char*>(&galaxia), sizeof(Galaxia));  // Escreve a galáxia modificada
-                arquivoBinario.seekg(0, ios::end);
-                cout << endl <<" Galáxia removida com sucesso!" << endl;
-                // arquivoBinario.close();
-                break;  // Sai da função após a remoção
-            }
+    // Busca a galáxia no vetor pelo identificador
+    for (int i = 0; i < tamanhoArquivo; i++) {
+        if (galaxias[i].identificador == identificadorParaRemover) {
+            // Marca a galáxia como removida na memória
+            galaxias[i].identificador = -1;  // Usando -1 como marcação de remoção lógica
+            cout << endl <<" Galáxia removida com sucesso!" << endl;
+            return;
         }
-
-        // Se o identificador não for encontrado
-        //cout << endl <<" Galáxia com identificador " << identificadorParaRemover << " não encontrada." << endl;
-
-        arquivoBinario.close();
-    } else {
-        cerr << endl <<" Erro ao abrir o arquivo binário." << endl;
     }
-   
+
+    // Se o identificador não for encontrado
+    cout << endl <<" Galáxia com identificador " << identificadorParaRemover << " não encontrada." << endl;
 }
 
 // Função que busca uma galáxia no vetor de galáxias
@@ -660,21 +643,21 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
                 saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoDoVetor);
                 break;
             case 4: // Inserir registro
-                inserirGalaxia(galaxias, tamanhoArquivo);
+                inserirGalaxia(galaxias, tamanhoDoVetor);
                 saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoDoVetor);
                 break;
             case 5: // Apagar registro
-                removerGalaxia(nome_arquivo_binario);
+                removerGalaxia(galaxias, tamanhoDoVetor);
                 saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoDoVetor);
                 break;
             case 6: // Buscar registro
-                buscarGalaxia(galaxias, tamanhoArquivo);
+                buscarGalaxia(galaxias, tamanhoDoVetor);
                 break;
             case 7: // Exibir lista completa de registros
-                exibirListaCompleta(galaxias, tamanhoArquivo);
+                exibirListaCompleta(galaxias, tamanhoDoVetor);
                 break;
             case 8: // Exibir lista parcial de registros
-                imprimirIntervalo(galaxias, tamanhoArquivo);
+                imprimirIntervalo(galaxias, tamanhoDoVetor);
                 break;
             case 9: // Salvar alterações
                 saved = salvar_dados_bin(galaxias, nome_arquivo_binario, tamanhoDoVetor);
