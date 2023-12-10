@@ -672,6 +672,7 @@ void menu(int tamanhoArquivo, string nomeArquivoCSVimport, string nomeArquivoCSV
                 break;
         }
     }
+    delete[] galaxias;
 }
 
 // Função principal
